@@ -163,7 +163,16 @@
     "mapOpen": "เปิดใน Google Maps",
     "ctaHeading": "มีคำถามใช่ไหม",
     "ctaBody": "ติดต่อทีมงานของคลินิก การส่งแบบฟอร์มสอบถามไม่ใช่การยืนยันนัดหมาย",
-    "primaryCta": "ติดต่อคลินิก"
+    "primaryCta": "ติดต่อคลินิก",
+    "icsiImageAlt": "ภาพสามมิติเชิงวิทยาศาสตร์ของการฉีดอสุจิเข้าสู่เซลล์ไข่ (ICSI) ด้วยเข็มแก้วขนาดเล็ก",
+    "icsiCaption": "การฉีดอสุจิเข้าสู่เซลล์ไข่ (ภาพประกอบ)",
+    "servicesCarouselLabel": "บริการของเรา",
+    "servicesPrev": "บริการก่อนหน้า",
+    "servicesNext": "บริการถัดไป",
+    "servicesPosition": "บริการที่ {index} จาก {total}",
+    "servicesSelected": "กำลังแสดง",
+    "servicesImagePending": "รอภาพประกอบจริง",
+    "servicesHint": "ใช้ปุ่มลูกศร ปัดหรือลากเพื่อเลื่อนดูบริการ"
   },
   "About": {
     "metaTitle": "เกี่ยวกับคลินิก",

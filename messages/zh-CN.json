@@ -163,7 +163,16 @@
     "mapOpen": "在 Google 地图中打开",
     "ctaHeading": "有疑问吗？",
     "ctaBody": "欢迎联系诊所团队。提交咨询并不代表预约已确认。",
-    "primaryCta": "联系诊所"
+    "primaryCta": "联系诊所",
+    "icsiImageAlt": "卵胞浆内单精子注射（ICSI）的三维科学示意图：细玻璃针将精子注入卵细胞",
+    "icsiCaption": "卵胞浆内单精子注射（示意图）",
+    "servicesCarouselLabel": "服务项目",
+    "servicesPrev": "上一项服务",
+    "servicesNext": "下一项服务",
+    "servicesPosition": "第 {index} 项服务，共 {total} 项",
+    "servicesSelected": "当前显示",
+    "servicesImagePending": "配图待提供",
+    "servicesHint": "使用箭头、滑动或拖动浏览服务"
   },
   "About": {
     "metaTitle": "关于诊所",

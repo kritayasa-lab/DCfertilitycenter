@@ -163,7 +163,16 @@
     "mapOpen": "Open in Google Maps",
     "ctaHeading": "Have a question?",
     "ctaBody": "Contact the clinic team. Submitting an inquiry does not confirm an appointment.",
-    "primaryCta": "Contact the clinic"
+    "primaryCta": "Contact the clinic",
+    "icsiImageAlt": "3D scientific illustration of intracytoplasmic sperm injection (ICSI): a fine glass pipette delivering a sperm cell into an egg",
+    "icsiCaption": "Intracytoplasmic sperm injection (illustration)",
+    "servicesCarouselLabel": "Our services",
+    "servicesPrev": "Previous service",
+    "servicesNext": "Next service",
+    "servicesPosition": "Service {index} of {total}",
+    "servicesSelected": "Showing",
+    "servicesImagePending": "Image pending",
+    "servicesHint": "Use the arrows, swipe or drag to browse services"
   },
   "About": {
     "metaTitle": "About the clinic",
