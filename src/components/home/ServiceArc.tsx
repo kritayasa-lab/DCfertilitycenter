@@ -4,6 +4,7 @@ import { useRef, useState, type CSSProperties, type KeyboardEvent, type PointerE
 import type { ServiceIcon as Icon } from "@/content/types";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
+import { CarouselControls } from "./CarouselControls";
 import { ServiceIcon } from "./ServiceIcon";
 
 export interface ArcService {
@@ -22,6 +23,8 @@ export interface ServiceArcLabels {
   open: string;
   imagePending: string;
   hint: string;
+  /** Template "… {page} …" for the pagination dots. */
+  goTo: string;
 }
 
 const fill = (template: string, values: Record<string, number>) =>
@@ -39,8 +42,10 @@ function offset(index: number, active: number, n: number) {
  * Curved, overlapping service carousel. Cards sit on an invisible arc: each
  * card's position comes from its signed distance d to the active card
  * (translate along the arc, drop, tilt, scale, z-order), so movement is pure
- * CSS transforms. Controls: arrow buttons, ←/→ keys, drag/swipe, clicking a
- * side card, or tabbing to a card's link (focus brings it to the centre).
+ * CSS transforms. Controls (shared with the Packages carousel): previous/next
+ * arrows and pagination dots; plus ←/→ keys, one-card-per-gesture drag/swipe,
+ * clicking a side card, or tabbing to a card's link (focus brings it to the
+ * centre). The ring wraps around, so the arrows are never disabled.
  * The active card is marked by position, size, a "Showing" label and
  * aria-current, not by colour alone. Reduced motion removes the transitions.
  */
@@ -61,18 +66,19 @@ export function ServiceArc({ services, labels }: { services: ArcService[]; label
     }
   };
 
+  // Drag/swipe: one card per gesture once the pointer travels past a sensible
+  // threshold; the click that ends a drag is suppressed.
+  const SWIPE_THRESHOLD = 50;
   const onPointerDown = (event: PointerEvent) => {
     if (event.pointerType === "mouse" && event.button !== 0) return;
     drag.current = { x: event.clientX, id: event.pointerId, moved: false };
   };
   const onPointerMove = (event: PointerEvent) => {
     const state = drag.current;
-    if (!state || state.id !== event.pointerId) return;
+    if (!state || state.id !== event.pointerId || state.moved) return;
     const dx = event.clientX - state.x;
-    // One card per ~90px of drag: calm, predictable movement (no flinging).
-    if (Math.abs(dx) > 90) {
+    if (Math.abs(dx) > SWIPE_THRESHOLD) {
       state.moved = true;
-      state.x = event.clientX;
       go(active + (dx < 0 ? 1 : -1));
     }
   };
@@ -80,9 +86,6 @@ export function ServiceArc({ services, labels }: { services: ArcService[]; label
     // Keep `moved` until the click that follows a drag has been suppressed.
     setTimeout(() => (drag.current = null), 0);
   };
-
-  const arrowClass =
-    "inline-flex h-12 w-12 items-center justify-center rounded-pill border border-border-strong bg-surface text-foreground shadow-soft transition-colors hover:border-primary hover:bg-primary hover:text-on-primary focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-focus";
 
   return (
     <section aria-roledescription="carousel" aria-label={labels.region} className="relative">
@@ -195,21 +198,15 @@ export function ServiceArc({ services, labels }: { services: ArcService[]; label
         })}
       </div>
 
-      <div className="mt-6 flex items-center justify-center gap-4">
-        <button type="button" onClick={() => go(active - 1)} aria-label={labels.previous} className={arrowClass}>
-          <svg aria-hidden="true" viewBox="0 0 20 20" className="h-5 w-5">
-            <path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-          </svg>
-        </button>
-        <p aria-hidden="true" className="min-w-16 text-center text-sm font-semibold tabular-nums text-muted">
-          {String(active + 1).padStart(2, "0")} <span className="text-border-strong">/</span> {String(n).padStart(2, "0")}
-        </p>
-        <button type="button" onClick={() => go(active + 1)} aria-label={labels.next} className={arrowClass}>
-          <svg aria-hidden="true" viewBox="0 0 20 20" className="h-5 w-5">
-            <path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-          </svg>
-        </button>
-      </div>
+      <CarouselControls
+        count={n}
+        current={active}
+        onSelect={go}
+        onPrevious={() => go(active - 1)}
+        onNext={() => go(active + 1)}
+        labels={{ group: labels.region, goTo: labels.goTo, previous: labels.previous, next: labels.next }}
+        className="mx-auto max-w-xl"
+      />
     </section>
   );
 }

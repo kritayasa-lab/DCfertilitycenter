@@ -1,7 +1,7 @@
 "use client";
 
 import { Children, useCallback, useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
-import { cn } from "@/lib/cn";
+import { CarouselControls } from "./CarouselControls";
 
 export interface CarouselLabels {
   region: string;
@@ -96,9 +96,6 @@ export function Carousel({
     }
   };
 
-  const arrowClass =
-    "inline-flex h-11 w-11 items-center justify-center rounded-pill border border-border-strong bg-surface text-foreground transition-colors hover:bg-primary hover:text-on-primary disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-surface disabled:hover:text-foreground";
-
   return (
     <section aria-roledescription={labels.roleCarousel} aria-label={labels.region} className={className}>
       <div
@@ -121,39 +118,16 @@ export function Carousel({
         ))}
       </div>
 
-      <div className="mt-6 flex items-center justify-between gap-4">
-        <div className="flex items-center gap-1" role="group" aria-label={labels.region}>
-          {Array.from({ length: pages }, (_, i) => (
-            <button
-              key={i}
-              type="button"
-              onClick={() => goTo(i)}
-              aria-label={fill(labels.goTo, { page: i + 1 })}
-              aria-current={i === page ? "true" : undefined}
-              className="group/dot flex h-11 w-8 items-center justify-center"
-            >
-              <span
-                className={cn(
-                  "block h-2.5 rounded-pill transition-all duration-300",
-                  i === page ? "w-7 bg-primary" : "w-2.5 bg-border-strong group-hover/dot:bg-muted",
-                )}
-              />
-            </button>
-          ))}
-        </div>
-        <div className="flex gap-2">
-          <button type="button" onClick={() => goTo(page - 1)} disabled={page === 0} aria-label={labels.previous} className={arrowClass}>
-            <svg aria-hidden="true" viewBox="0 0 20 20" className="h-5 w-5">
-              <path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-            </svg>
-          </button>
-          <button type="button" onClick={() => goTo(page + 1)} disabled={page >= pages - 1} aria-label={labels.next} className={arrowClass}>
-            <svg aria-hidden="true" viewBox="0 0 20 20" className="h-5 w-5">
-              <path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" strokeWidth="1.8" />
-            </svg>
-          </button>
-        </div>
-      </div>
+      <CarouselControls
+        count={pages}
+        current={page}
+        onSelect={goTo}
+        onPrevious={() => goTo(page - 1)}
+        onNext={() => goTo(page + 1)}
+        previousDisabled={page === 0}
+        nextDisabled={page >= pages - 1}
+        labels={{ group: labels.region, goTo: labels.goTo, previous: labels.previous, next: labels.next }}
+      />
     </section>
   );
 }

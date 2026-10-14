@@ -35,6 +35,7 @@ export async function ServicesSection({ locale }: { locale: Locale }) {
             open: t("serviceCta"),
             imagePending: t("servicesImagePending"),
             hint: t("servicesHint"),
+            goTo: t("servicesGoTo", { page: "{page}" }),
           }}
         />
       </Container>
