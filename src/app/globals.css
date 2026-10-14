@@ -1,0 +1,256 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens: "Olive Garden Feast" palette (approved for the redesign).
+ *   Olive Leaf #606C38 · Black Forest #283618 · Cornsilk #FEFAE0
+ *   Light Caramel #DDA15E · Copper #BC6C25
+ * The clinic logo keeps its own original colours and is never themed.
+ * Components use the semantic tokens only; re-brand by editing the scales.
+ * Contrast of semantic pairs is enforced by tests/unit/contrast.test.ts.
+ */
+@theme {
+  /* ---------- Palette scales ---------- */
+  --color-forest-900: #283618; /* Black Forest */
+  --color-forest-800: #34441f;
+  --color-forest-700: #4b5530; /* deep olive, small muted text */
+  --color-olive-600: #606c38; /* Olive Leaf */
+  --color-olive-200: #d6dab8;
+  --color-olive-100: #eff0d8;
+  --color-cornsilk-50: #fffdf6; /* warm white */
+  --color-cornsilk-100: #fefae0; /* Cornsilk */
+  --color-cornsilk-200: #f5eecb;
+  --color-cornsilk-300: #e6dcb0;
+  --color-caramel-100: #f8eccf;
+  --color-caramel-400: #dda15e; /* Light Caramel (decorative / surfaces only) */
+  --color-copper-500: #bc6c25; /* Copper (large text, icons, focus) */
+  --color-copper-700: #8f4e14; /* text-safe copper */
+  /* Champagne gold: reserved for primary contact/appointment CTAs. */
+  --color-gold-50: #fbf6ea;
+  --color-gold-100: #f6ebd2;
+  --color-gold-200: #ecdab2;
+  --color-gold-300: #e0c690;
+  --color-gold-400: #d0ae73;
+  --color-gold-600: #9c7a3e;
+
+  /* ---------- Semantic tokens (use these in components) ---------- */
+  --color-background: var(--color-cornsilk-50);
+  --color-surface: #ffffff;
+  --color-surface-muted: var(--color-cornsilk-100);
+  --color-surface-accent: var(--color-caramel-100);
+  --color-surface-inverse: var(--color-forest-900);
+  --color-foreground: var(--color-forest-900);
+  --color-muted: var(--color-forest-700);
+  --color-on-inverse: var(--color-cornsilk-100);
+  --color-border: var(--color-cornsilk-300);
+  --color-border-strong: #cbbd8c;
+
+  --color-primary: var(--color-olive-600);
+  --color-primary-hover: var(--color-forest-900);
+  --color-primary-soft: var(--color-olive-100);
+  --color-on-primary: var(--color-cornsilk-100);
+
+  --color-accent: var(--color-caramel-400);
+  --color-accent-soft: var(--color-caramel-100);
+  --color-accent-strong: var(--color-copper-700);
+  --color-accent-vivid: var(--color-copper-500);
+  --color-cta-gold: var(--color-gold-300);
+  --color-cta-gold-deep: var(--color-gold-400);
+  --color-cta-gold-edge: var(--color-gold-600);
+  --color-on-cta-gold: var(--color-forest-900);
+
+  --color-focus: var(--color-copper-500);
+  --color-danger: #9b2c22;
+  --color-danger-soft: #fbebe6;
+  --color-success: var(--color-forest-800);
+  --color-success-soft: var(--color-olive-100);
+  --color-warning: #7a4a12;
+  --color-warning-soft: #fbf0d9;
+
+  /* ---------- Typography ---------- */
+  /*
+   * System-first stack: Apple system UI fonts where available (never bundled),
+   * Segoe UI on Windows, then Thai and Simplified Chinese fallbacks. Noto Sans
+   * Thai is self-hosted via next/font (OFL) so Thai renders consistently on
+   * systems without a Thai UI font.
+   */
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", "Helvetica Neue",
+    var(--font-noto-sans-thai), "Noto Sans Thai", "Sukhumvit Set", "Thonburi", "PingFang SC",
+    "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+  --font-display:
+    -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", "Helvetica Neue",
+    var(--font-noto-sans-thai), "Noto Sans Thai", "Sukhumvit Set", "Thonburi", "PingFang SC",
+    "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-pill: 999px;
+
+  /* ---------- Elevation ---------- */
+  --shadow-soft: 0 1px 2px rgb(40 54 24 / 0.05), 0 2px 8px rgb(40 54 24 / 0.05);
+  --shadow-card: 0 1px 2px rgb(40 54 24 / 0.06), 0 10px 28px rgb(40 54 24 / 0.07);
+  --shadow-raised: 0 6px 16px rgb(40 54 24 / 0.1), 0 20px 48px rgb(40 54 24 / 0.1);
+
+  /* ---------- Layout ---------- */
+  --container-content: 76rem;
+  --container-prose: 42rem;
+
+  /* ---------- Motion ---------- */
+  --animate-float: float 12s ease-in-out infinite;
+
+  /* A very slow, small vertical drift for the hero artwork. */
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -8px, 0);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+  }
+
+  /* Thai and Chinese scripts need more vertical room than Latin text. */
+  html[lang="th"] body {
+    line-height: 1.75;
+  }
+  html[lang="zh-CN"] body {
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 650;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  html[lang="th"] :is(h1, h2, h3) {
+    line-height: 1.4;
+    letter-spacing: 0;
+  }
+  html[lang="zh-CN"] :is(h1, h2, h3) {
+    line-height: 1.35;
+    letter-spacing: 0.01em;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/*
+ * Thai script must not be letter-spaced (it breaks syllable clusters).
+ * Unlayered on purpose: it must override Tailwind's tracking-* utilities.
+ */
+[class*="tracking-"]:lang(th) {
+  letter-spacing: 0;
+}
+
+/*
+ * Premium champagne-gold CTA (Button variant "gold"). Soft tonal gradient,
+ * a fine inner highlight and a single sheen sweep on hover/focus only.
+ */
+@layer components {
+  .btn-gold {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: var(--color-on-cta-gold);
+    background-image: linear-gradient(
+      180deg,
+      var(--color-gold-100) 0%,
+      var(--color-gold-200) 32%,
+      var(--color-cta-gold) 68%,
+      var(--color-cta-gold-deep) 100%
+    );
+    background-size: 100% 165%;
+    background-position: 50% 0%;
+    border: 1px solid color-mix(in srgb, var(--color-cta-gold-edge) 45%, transparent);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.7),
+      inset 0 -1px 0 rgb(156 122 62 / 0.22),
+      0 8px 20px -10px rgb(156 122 62 / 0.65);
+    letter-spacing: 0.01em;
+    transition:
+      background-position 500ms ease,
+      box-shadow 300ms ease,
+      transform 300ms ease;
+  }
+  .btn-gold:lang(th) {
+    letter-spacing: 0;
+  }
+  .btn-gold::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 30%, rgb(255 255 255 / 0.55) 50%, transparent 70%);
+    transform: translateX(-130%);
+    transition: transform 900ms cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+  .btn-gold:hover,
+  .btn-gold:focus-visible {
+    background-position: 50% 100%;
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.75),
+      inset 0 -1px 0 rgb(156 122 62 / 0.3),
+      0 12px 26px -12px rgb(156 122 62 / 0.8);
+    transform: translateY(-1px);
+  }
+  .btn-gold:hover::after,
+  .btn-gold:focus-visible::after {
+    transform: translateX(130%);
+  }
+  .btn-gold:focus-visible {
+    outline: 3px solid var(--color-forest-900);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .btn-gold::after {
+      display: none;
+    }
+    .btn-gold:hover,
+    .btn-gold:focus-visible {
+      transform: none;
+    }
+  }
+}
