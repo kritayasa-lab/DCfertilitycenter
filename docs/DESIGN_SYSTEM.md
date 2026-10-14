@@ -18,6 +18,19 @@ Derived (same hues, for accessible text): warm white `#FFFDF6` (`background`), d
 (`surface-accent`), olive tint `#EFF0D8` (`primary-soft`).
 
 **The clinic logo keeps its original teal colours** and is never themed, recoloured or redrawn.
+It is shown with `object-fit: contain` at its intrinsic ratio; the frame is sized to the artwork's
+bounding box so the transparent margin falls outside (CSS only, `LogoImage`). No background,
+card, filter, blend mode or shadow is applied. The footer shows the clinic name as text, because
+the logo's dark-teal wordmark has only 2.3:1 contrast on the dark footer.
+
+### Champagne gold (primary CTAs only)
+
+`gold-50 #FBF6EA` · `gold-100 #F6EBD2` · `gold-200 #ECDAB2` · `gold-300 #E0C690` (`cta-gold`) ·
+`gold-400 #D0AE73` (`cta-gold-deep`) · `gold-600 #9C7A3E` (`cta-gold-edge`). Text: Black Forest
+(`on-cta-gold`, ≥ 7:1 on every stop). Use `<ButtonLink variant="gold">` for contact/appointment
+CTAs only (header "Contact us", hero primary, CTA band). Soft vertical gradient, fine inner
+highlight, single sheen sweep on hover/focus, 3px Black Forest focus ring; the sheen and lift are
+disabled under reduced motion. Secondary actions stay `secondary`/`ghost`.
 
 ## Contrast (enforced by `tests/unit/contrast.test.ts`)
 
@@ -38,14 +51,16 @@ Noto Sans Thai (self-hosted via next/font, SIL OFL), "Sukhumvit Set", "Thonburi"
 
 ## Motion
 
-Hero decoration uses a slow `drift` keyframe (`animate-drift`) applied only with `motion-safe:`.
-Vision words enlarge with a CSS transform on hover/focus/selected state. A global
+The hero ICSI artwork floats very slowly (`animate-float`, 8px over 12s, `motion-safe:` only).
+Vision words enlarge slightly (1.06) with a champagne underline on hover/focus/selected state.
+The services arc moves cards with CSS transforms (700 ms ease-out). A global
 `prefers-reduced-motion` rule disables animations and transitions (tested).
 
 ## Components
 
 - **UI primitives:** Button/ButtonLink, Container, Section, Card, Badge, Notice, PendingValue.
-- **Homepage:** VisionWords, Carousel (scroll-snap, dots, arrows, keyboard), ServiceIcon,
+- **Homepage:** VisionWords (`stage` / `compact`), ServiceArc (curved overlapping services
+  carousel: arrows, ←/→, drag/swipe, focus-to-centre), Carousel (scroll-snap, dots, arrows, keyboard), ServiceIcon,
   MapEmbed (click-to-load), InquiryForm, VideoFacade, SectionHeading.
 - **Layout:** Header (six primary items), SiteLogo (original PNG; CSS framing only), Footer.
 

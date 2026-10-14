@@ -63,7 +63,7 @@ test.describe("homepage structure", () => {
 
   test("exactly six service cards, linking to existing pages", async ({ page, request }) => {
     await page.goto("/th");
-    const cards = page.locator("section[aria-labelledby=services-heading] li article");
+    const cards = page.locator("section[aria-labelledby=services-heading] [data-service-card]");
     await expect(cards).toHaveCount(6);
     await expect(cards.locator("h3")).toHaveText([
       "ให้คำปรึกษา หาสาเหตุภาวะมีบุตรยาก",
@@ -73,9 +73,16 @@ test.describe("homepage structure", () => {
       "การตรวจคัดเลือกพันธุกรรมก่อนการฝังตัว (PGT)",
       "บริการด้านอื่น ๆ ทางสูติศาสตร์และนรีเวช",
     ]);
-    for (const href of await cards.locator("h3 a").evaluateAll((a) => a.map((x) => x.getAttribute("href")!))) {
-      expect((await request.get(href)).status(), href).toBe(200);
-    }
+    const hrefs = await cards.locator("a").evaluateAll((a) => a.map((x) => x.getAttribute("href")!));
+    expect(hrefs).toEqual([
+      "/th/services/fertility-consultation",
+      "/th/services/iui",
+      "/th/services/ivf",
+      "/th/services/pesa-tese",
+      "/th/services/pgt",
+      "/th/services/obstetrics-gynaecology",
+    ]);
+    for (const href of hrefs) expect((await request.get(href)).status(), href).toBe(200);
   });
 
   test("Q&A shows exactly two article cards and an all-articles link", async ({ page }) => {
@@ -258,6 +265,7 @@ test.describe("original assets", () => {
       ["/images/brand/dc-fertility-center-logo.png", "images/Untitled Design - 1.PNG"],
       ["/images/doctors/hero-doctors.jpg", "images/IMG_7370.JPG"],
       ["/images/clinic/why-choose-doctors.jpg", "images/IMG_7371.JPG"],
+      ["/images/hero/icsi-hero.png", "images/การปฏิสนธิไข่ด้วยเทคนิค ICSI.png"],
     ]) {
       const response = await request.get(served);
       expect(response.status()).toBe(200);
@@ -270,14 +278,16 @@ test.describe("original assets", () => {
     const logo = page.getByRole("banner").locator("img").first();
     await expect(logo).toHaveAttribute("src", /brand%2Fdc-fertility-center-logo\.png/);
     const fit = await logo.evaluate((img) => getComputedStyle(img).objectFit);
-    expect(fit).toBe("cover"); // scales uniformly; never stretched
+    expect(fit).toBe("contain"); // intrinsic aspect ratio; never stretched or cropped into
 
-    const heroImg = page.locator("section[aria-labelledby=hero-heading] img");
-    await expect(heroImg).toHaveAttribute("src", /doctors%2Fhero-doctors\.jpg/);
+    const heroImg = page.locator("section[aria-labelledby=hero-heading] figure img");
+    await expect(heroImg).toHaveAttribute("src", /hero%2Ficsi-hero\.png/);
+    const doctorsImg = page.locator("section[aria-labelledby=hero-heading] img[src*='hero-doctors']");
+    await expect(doctorsImg).toHaveCount(1);
     const why = page.locator("section[aria-labelledby=why-heading] img");
     await why.scrollIntoViewIfNeeded();
     await expect(why).toHaveAttribute("src", /clinic%2Fwhy-choose-doctors\.jpg/);
-    for (const img of [logo, heroImg, why]) {
+    for (const img of [logo, heroImg, doctorsImg, why]) {
       await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
     }
   });
