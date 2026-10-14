@@ -28,19 +28,20 @@ for (const { locale, heading } of locales) {
 
 test("language switcher keeps the visitor on the equivalent page", async ({ page }) => {
   await page.goto("/en/styleguide");
-  await page.getByLabel("Language").selectOption("zh-CN");
+  await page.getByRole("main").getByRole("combobox", { name: "Language" }).selectOption("zh-CN");
   await expect(page).toHaveURL(/\/zh-CN\/styleguide$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
 
-  await page.getByLabel("语言").selectOption("th");
+  await page.getByRole("main").getByRole("combobox", { name: "语言" }).selectOption("th");
   await expect(page).toHaveURL(/\/th\/styleguide$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "th");
 });
 
 test("locale is preserved when following internal links", async ({ page }) => {
   await page.goto("/zh-CN");
-  await page.getByRole("link", { name: "查看设计基础" }).click();
-  await expect(page).toHaveURL(/\/zh-CN\/styleguide$/);
+  await page.getByRole("main").getByRole("link", { name: "了解服务项目" }).click();
+  await expect(page).toHaveURL(/\/zh-CN\/services$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
 });
 
 test("unknown paths under a locale show the localized 404", async ({ page }) => {
@@ -51,7 +52,7 @@ test("unknown paths under a locale show the localized 404", async ({ page }) => 
 
 test("unverified clinic details are labelled, not presented as fact", async ({ page }) => {
   await page.goto("/en");
-  await expect(page.getByText("Provisional working name")).toBeVisible();
+  await expect(page.getByRole("banner").getByText("Provisional working name")).toBeVisible();
   await expect(page.getByRole("note")).toContainText("has not been verified");
 });
 
