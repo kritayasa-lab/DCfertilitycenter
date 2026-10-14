@@ -6,30 +6,44 @@ Nothing on the site is verified clinic information yet. This file tracks what is
 
 | Item | Status | Notes |
 |---|---|---|
-| Clinic name "DC Fertility Center Hatyai" | **Provisional** | Approved as a working name only; shown with a "provisional" badge |
-| Logo | Pending | Text placeholder; favicon is a neutral shape |
-| Address, map, opening hours | Pending | Rendered as `[Address]` etc. with "pending verification" |
-| Phone, email, LINE | Pending | Not rendered as links until verified |
-| Social links | Pending | |
-| Doctors, qualifications | Pending | Must not be invented (Phase 2 uses explicit placeholders) |
-| Services offered | Pending | Only services the clinic confirms will be published |
-| Prices, packages, promotions | Pending | Never invented |
-| Success rates, testimonials, certifications | Pending | Not published without evidence and authorization |
-| Legal pages (privacy, terms, disclaimer, cookies) | Pending | Will be marked as drafts that need legal review |
+| Clinic name: TH "คลินิกหมอชัยณรงค์", EN/ZH "DC Fertility Center" | **Provisional** | Approved for the redesign; final sign-off pending |
+| Footer name as supplied: "คลินิกหมอหมอชัยณรงค์" | **Needs confirmation** | Duplicated "หมอ"; the site uses "คลินิกหมอชัยณรงค์" per the branding decision |
+| Logo (`Untitled Design - 1.PNG`) | Provided | Used unmodified; a tightly cropped/SVG export would display sharper |
+| Doctor photographs (`IMG_7370.JPG`, `IMG_7371.JPG`) | Provided, publication consent confirmed by owner | `IMG_7370` contains a baked-in marketing caption; no cutout (see below) |
+| Doctors: รศ.นพ.ชัยณรงค์ โชคสุชาติ ว.23473; พญ.ธนพร ประทีปชัยกูร ว.51688 | Provided (Thai, exact) | Not translated/transliterated; EN/ZH versions need approval |
+| Specialty lines (2) | Provided (Thai, exact) | |
+| Address: 97/12 ถนนราษฎร์ยินดี อำเภอหาดใหญ่ จังหวัดสงขลา 90110 | Provided (Thai) | Shown in Thai in all locales |
+| Phones: 097-3470648, 074-225-223 | Provided | `tel:` links (+66) |
+| Google Maps link | Provided | Opened directly; map embed uses the address as query, no coordinates |
+| Email, LINE, opening hours | Pending | Not shown |
+| Instagram, TikTok, Facebook | Pending | Shown as "official link pending" without links |
+| Services (six names, Thai) | Provided | EN/ZH titles are draft translations; all descriptions pending |
+| Packages, prices, promotions | Pending | Homepage carousel shows labelled blank slots |
+| Success stories / videos | Pending | Placeholder slots; consent + review required |
+| "Why choose" description | Pending | Labelled placeholder; no invented mission statement |
+| Success rates | Pending | `/success-rates` is a draft page (noindex) with no figures |
+
+### Hero photo cutout
+
+A non-generative background removal was evaluated and **not applied**: the white coats and the
+light background in `IMG_7370.JPG` have near-identical colours (≈RGB 233–254), so colour-based
+masking would cut into the subjects, and no segmentation tooling was available offline. The original
+photograph is displayed unchanged with CSS sizing only.
 
 ## Placeholder fixtures (`src/content/fixtures`)
 
 | Fixture | Records | Notes |
 |---|---|---|
-| services | `example-service-1..4` | Not confirmed as offered; all detail sections pending |
-| doctors | `doctor-profile-1..2` | No names, credentials, registration numbers or photos |
+| services | 6 clinic-supplied services | Names supplied; all detail sections pending |
+| doctors | `doctor-profile-1..2` | Names + licence numbers as supplied; other fields pending |
+| home | `promo-slot-1..4`, `story-slot-1..4` | Blank labelled carousel slots |
 | facilities | `facility-1..3` | Pending verification |
 | packages | `example-package`, `expired-example-promotion` | No prices; the expired one exists to test expiry filtering |
 | articles | `example-article-1..2`, `example-clinic-news` | Bodies pending medical review; `example-article-2` has no zh-CN translation (tests the explicit missing-translation state) |
 | faqs | 3 | Two describe the website's inquiry process; one is a placeholder |
 
 Every fixture translation is `status: "draft"`. Replace fixtures with clinic-approved content (or,
-from Phase 4, CMS records). Delete the example records before launch.
+from Phase 4, CMS records, see `docs/ADMIN_CMS_REQUIREMENTS.md`). Delete the example records before launch.
 
 Intentionally **not** built until genuine content exists: patient stories and testimonials, success
 rates, accreditation badges, structured data.
@@ -43,9 +57,12 @@ cross-border transfers, data subject rights) must come from the clinic's counsel
 
 ## Contact form
 
-The inquiry form on `/contact` is a **non-functional layout**. All controls are disabled, it has no
-action, and a notice says nothing is sent or stored and that an inquiry does not confirm an appointment.
-It collects only initial-contact fields (no medical details, ID numbers or uploads). Phase 6 connects it.
+The inquiry form (homepage section 7 and `/contact`) validates input with localized messages. Delivery
+is **not connected**: valid input is checked in the browser only, **nothing is transmitted**, and the
+visitor sees "your details have NOT been sent — please call …". A Google Apps Script adapter is
+prepared (`src/lib/inquiry/delivery.ts`) but stays off unless both `GOOGLE_APPS_SCRIPT_URL` and
+`INQUIRY_DELIVERY_ENABLED=true` are set, which requires the Phase 6 review. It reports success only
+when the endpoint confirms receipt.
 
 ## Translations
 

@@ -1,55 +1,57 @@
-# Design system (provisional)
+# Design system
 
-The visual direction was approved as an **initial proposal**, not as the clinic's official brand.
-All styling flows from tokens in `src/app/globals.css` (Tailwind v4 `@theme`), so re-branding
-means editing the palette scales without touching components.
+All styling flows from tokens in `src/app/globals.css` (Tailwind v4 `@theme`). Components use
+**semantic** tokens only, so re-branding means editing the palette scales.
 
-## Direction
+## Palette: "Olive Garden Feast" (approved for the redesign)
 
-Warm ivory/sand base · deep teal-green primary · soft blush accent · serif display headings with a
-clean sans-serif body · generous spacing · subtle shadows · minimal motion (respects
-`prefers-reduced-motion`).
+| Name | Hex | Token | Use |
+|---|---|---|---|
+| Olive Leaf | `#606C38` | `olive-600` → `primary` | Key buttons, interactive states |
+| Black Forest | `#283618` | `forest-900` → `foreground`, `primary-hover`, `surface-inverse` | Primary text, footer |
+| Cornsilk | `#FEFAE0` | `cornsilk-100` → `surface-muted`, `on-primary` | Section backgrounds, text on olive |
+| Light Caramel | `#DDA15E` | `caramel-400` → `accent` | Decorative shapes and surfaces only (fails as text) |
+| Copper | `#BC6C25` | `copper-500` → `accent-vivid`, `focus` | Large text (vision words), icons, focus ring |
 
-## Tokens
+Derived (same hues, for accessible text): warm white `#FFFDF6` (`background`), deep olive `#4B5530`
+(`muted` text), dark copper `#8F4E14` (`accent-strong` small accent text), caramel tint `#F8ECCF`
+(`surface-accent`), olive tint `#EFF0D8` (`primary-soft`).
 
-| Group | Tokens |
-|---|---|
-| Palette scales | `ivory-*`, `sand-*`, `teal-*`, `blush-*`, `ink-*` |
-| Semantic colours | `background`, `surface`, `surface-muted`, `surface-accent`, `foreground`, `muted`, `border`, `border-strong`, `primary`, `primary-hover`, `primary-soft`, `on-primary`, `accent`, `accent-soft`, `accent-strong`, `focus`, `danger(-soft)`, `success(-soft)`, `warning(-soft)` |
-| Fonts | `font-sans`, `font-display` (per-script fallbacks for Thai and Chinese) |
-| Radius | `rounded-sm`, `rounded-md`, `rounded-lg`, `rounded-xl`, `rounded-pill` |
-| Shadows | `shadow-soft`, `shadow-card`, `shadow-raised` |
-| Widths | `max-w-content` (72rem), `max-w-prose` (42rem) |
+**The clinic logo keeps its original teal colours** and is never themed, recoloured or redrawn.
 
-Components must use **semantic** tokens (e.g. `bg-primary`, `text-muted`), not palette scales,
-except where a component deliberately needs a specific shade.
+## Contrast (enforced by `tests/unit/contrast.test.ts`)
 
-## Contrast (WCAG 2.2 AA, measured)
+Text pairs ≥ 4.5:1 (e.g. foreground/background 12.6, muted/background 7.8, on-primary/primary 5.4,
+accent-strong/background 6.3, on-inverse/surface-inverse 12.2, caramel/forest 5.7). Large text and
+non-text UI ≥ 3:1 (copper on cornsilk 3.8). axe WCAG 2.2 AA scans run in Playwright.
 
-| Pair | Ratio |
-|---|---|
-| foreground / background | 14.83 |
-| muted / background | 6.83 |
-| muted / surface-muted | 6.07 |
-| on-primary / primary | 8.29 |
-| primary / background | 8.02 |
-| accent-strong / accent-soft | 4.84 |
-| warning / warning-soft | 5.37 |
-| danger / danger-soft | 5.79 |
-| success / success-soft | 5.68 |
-| focus ring / background (non-text, ≥ 3:1) | 4.47 |
+## Typography
 
-Re-check these whenever the palette changes.
+System-first stack (no proprietary fonts bundled):
+`-apple-system, BlinkMacSystemFont, "SF Pro Text"/"SF Pro Display", "Segoe UI", "Helvetica Neue",
+Noto Sans Thai (self-hosted via next/font, SIL OFL), "Sukhumvit Set", "Thonburi", "PingFang SC",
+"Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif`.
 
-## Components (Phase 1)
+- Headings: weight 650, tight tracking for Latin; Thai line-height 1.4, Chinese 1.35.
+- Body: line-height 1.6 (Latin), 1.75 (Thai/Chinese).
+- Thai text is never letter-spaced (a global rule resets `tracking-*` for `:lang(th)`).
 
-`Button` / `ButtonLink` (primary, secondary, ghost; md, lg; 44px+ touch targets) · `Container` ·
-`Section` (tones) · `Card` · `Badge` · `Notice` · `PendingValue` · `SkipLink` ·
-`DevelopmentBanner` · `LanguageSwitcher`. A live reference is at `/<locale>/styleguide`
-(internal, `noindex`).
+## Motion
+
+Hero decoration uses a slow `drift` keyframe (`animate-drift`) applied only with `motion-safe:`.
+Vision words enlarge with a CSS transform on hover/focus/selected state. A global
+`prefers-reduced-motion` rule disables animations and transitions (tested).
+
+## Components
+
+- **UI primitives:** Button/ButtonLink, Container, Section, Card, Badge, Notice, PendingValue.
+- **Homepage:** VisionWords, Carousel (scroll-snap, dots, arrows, keyboard), ServiceIcon,
+  MapEmbed (click-to-load), InquiryForm, VideoFacade, SectionHeading.
+- **Layout:** Header (six primary items), SiteLogo (original PNG; CSS framing only), Footer.
 
 ## Assets
 
-No third-party or reference-site assets are used. The favicon (`src/app/icon.svg`) is a neutral
-geometric placeholder, not a logo. Photography and the clinic logo must be clinic-owned or
-licensed before they are added.
+Approved originals live in `public/images/` (uploads) with byte-identical named copies in
+`public/images/{brand,doctors,clinic}/` registered in `src/config/assets.ts` and hash-checked in
+tests. Reference screenshots (palette, layout inspiration) are not part of the repository or public
+site. The favicon (`src/app/icon.svg`) is a neutral palette shape, not the logo.

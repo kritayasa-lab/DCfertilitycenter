@@ -63,7 +63,7 @@ All routes are prefixed with `/<locale>` (`th`, `en`, `zh-CN`).
 
 | Area | Routes | Access |
 |---|---|---|
-| Public | `/`, `/about`, `/services`, `/services/[slug]`, `/doctors`, `/doctors/[slug]`, `/facilities`, `/packages`, `/packages/[slug]`, `/articles` (`?category=`, `?q=`), `/articles/[slug]`, `/faq`, `/contact`, `/privacy`, `/terms`, `/medical-disclaimer`, `/cookies` | Anyone |
+| Public | `/`, `/about`, `/success-rates` (draft, noindex), `/services`, `/services/[slug]`, `/doctors`, `/doctors/[slug]`, `/facilities`, `/packages`, `/packages/[slug]`, `/articles` (`?category=`, `?q=`), `/articles/[slug]`, `/faq`, `/contact`, `/privacy`, `/terms`, `/medical-disclaimer`, `/cookies` | Anyone |
 | Patient portal | `/portal/login` (placeholder only in Phase 2); `/portal/*` from Phase 5 | Patients (Phase 3/5) |
 | Admin | `/admin/*` (approved convention, from Phase 3/4) | Staff/admin only |
 | Internal | `/styleguide` | `noindex`; remove or protect before production |
@@ -72,6 +72,20 @@ The `/[locale]/admin` decision changes only the URL shape. Authorization never d
 prefix: every admin and portal route and Server Action will check the session and role on the server
 (and RLS in the database). Portal and admin get separate layouts, separate login pages, and no
 shared dashboard. The public header links only to the patient login; staff use `/<locale>/admin/login`.
+
+## Homepage (redesign)
+
+`src/app/[locale]/page.tsx` composes server sections from `src/components/home/sections/` in the
+approved order: Hero (HOPE · TRUST · MIRACLE + doctors) → Services (6 cards) → Packages carousel →
+Success-stories carousel → Why choose → Q&A (2 articles) → Contact (map + form) → shared Footer.
+Client JavaScript is limited to: VisionWords, Carousel, MapEmbed, InquiryForm, VideoFacade, language
+switcher and navigation menus. Primary navigation has exactly six items (`src/config/navigation.ts`);
+doctors, facilities and articles stay reachable from the footer.
+
+Inquiry flow: `src/lib/inquiry/schema.ts` (shared Zod schema) → `InquiryForm` (client validation;
+no transmission while delivery is not configured) → `submitInquiry` server action → `delivery.ts`
+Google Apps Script adapter (inert unless explicitly enabled). Future CMS fields:
+`docs/ADMIN_CMS_REQUIREMENTS.md`.
 
 ## Public content model (Phase 2)
 
