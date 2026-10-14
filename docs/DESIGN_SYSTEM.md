@@ -51,18 +51,21 @@ Noto Sans Thai (self-hosted via next/font, SIL OFL), "Sukhumvit Set", "Thonburi"
 
 ## Motion
 
-The hero ICSI artwork floats very slowly (`animate-float`, 8px over 12s, `motion-safe:` only).
-Vision words enlarge slightly (1.06) with a champagne underline on hover/focus/selected state.
+Hero: split editorial layout. HOPE · TRUST on one row and a large light-weight MIRACLE below
+(one group, left), overlapping the doctors' photograph slightly; credentials directly beneath the
+photo. Vision words enlarge slightly (1.05) with a champagne underline on hover/focus/selected.
 The services arc moves cards with CSS transforms (700 ms ease-out). A global
 `prefers-reduced-motion` rule disables animations and transitions (tested).
 
 ## Components
 
 - **UI primitives:** Button/ButtonLink, Container, Section, Card, Badge, Notice, PendingValue.
-- **Homepage:** VisionWords (`stage` / `compact`), ServiceArc (curved overlapping services
-  carousel: arrows, ←/→, drag/swipe, focus-to-centre), Carousel (scroll-snap, dots, arrows, keyboard), ServiceIcon,
+- **Homepage:** VisionWords (`editorial` / `compact`), ServiceArc (curved overlapping services
+  carousel: shared dots + arrows, ←/→, one-card-per-swipe, focus-to-centre), Carousel (scroll-snap),
+  CarouselControls (dots + arrows shared by both carousels), ServiceIcon,
   MapEmbed (click-to-load), InquiryForm, VideoFacade, SectionHeading.
-- **Layout:** Header (six primary items), SiteLogo (original PNG; CSS framing only), Footer.
+- **Layout:** Header (single row: logo 136–172px, six primary items, language switcher; full
+  navigation from 1280px, menu button below), SiteLogo (original PNG; CSS framing only), Footer.
 
 ## Assets
 

@@ -38,7 +38,6 @@
     "faq": "常见问题",
     "contact": "联系我们",
     "contactCta": "联系我们",
-    "patientLogin": "患者登录",
     "openMenu": "打开菜单",
     "closeMenu": "关闭菜单",
     "more": "更多",
@@ -164,15 +163,14 @@
     "ctaHeading": "有疑问吗？",
     "ctaBody": "欢迎联系诊所团队。提交咨询并不代表预约已确认。",
     "primaryCta": "联系诊所",
-    "icsiImageAlt": "卵胞浆内单精子注射（ICSI）的三维科学示意图：细玻璃针将精子注入卵细胞",
-    "icsiCaption": "卵胞浆内单精子注射（示意图）",
     "servicesCarouselLabel": "服务项目",
     "servicesPrev": "上一项服务",
     "servicesNext": "下一项服务",
     "servicesPosition": "第 {index} 项服务，共 {total} 项",
     "servicesSelected": "当前显示",
     "servicesImagePending": "配图待提供",
-    "servicesHint": "使用箭头、滑动或拖动浏览服务"
+    "servicesHint": "使用箭头、滑动或拖动浏览服务",
+    "servicesGoTo": "前往第 {page} 项服务"
   },
   "About": {
     "metaTitle": "关于诊所",
@@ -319,12 +317,6 @@
       "failed": "发送失败。请重试或致电 {phones}。"
     },
     "honeypot": "网站（请留空）"
-  },
-  "Portal": {
-    "loginMetaTitle": "患者登录",
-    "loginTitle": "患者登录",
-    "loginUnavailable": "患者门户尚未开放。开放后，患者可管理账户并查看本人咨询的处理状态。",
-    "contactInstead": "如需联系诊所，请使用联系页面。"
   },
   "TranslationUnavailable": {
     "metaTitle": "暂无此语言版本",

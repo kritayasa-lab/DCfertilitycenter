@@ -9,7 +9,7 @@ Nothing on the site is verified clinic information yet. This file tracks what is
 | Clinic name: TH "คลินิกหมอชัยณรงค์", EN/ZH "DC Fertility Center" | **Provisional** | Approved for the redesign; final sign-off pending |
 | Footer name as supplied: "คลินิกหมอหมอชัยณรงค์" | **Needs confirmation** | Duplicated "หมอ"; the site uses "คลินิกหมอชัยณรงค์" per the branding decision |
 | Logo (`Untitled Design - 1.PNG`) | Provided | Used unmodified; a tightly cropped/SVG export would display sharper |
-| ICSI 3D artwork (`การปฏิสนธิไข่ด้วยเทคนิค ICSI.png` → `/images/hero/icsi-hero.png`) | Provided | Hero centrepiece; transparent PNG used unmodified (CSS edge fade only); captioned as an illustration |
+| ICSI 3D artwork (`การปฏิสนธิไข่ด้วยเทคนิค ICSI.png` → `/images/hero/icsi-hero.png`) | Provided | Kept in the asset registry (hash-checked) but not currently displayed: the hero now shows the doctors' photograph |
 | Service card images | Pending | Neutral labelled placeholders ("Image pending") in the services carousel |
 | Doctor photographs (`IMG_7370.JPG`, `IMG_7371.JPG`) | Provided, publication consent confirmed by owner | `IMG_7370` contains a baked-in marketing caption; no cutout (see below) |
 | Doctors: รศ.นพ.ชัยณรงค์ โชคสุชาติ ว.23473; พญ.ธนพร ประทีปชัยกูร ว.51688 | Provided (Thai, exact) | Not translated/transliterated; EN/ZH versions need approval |

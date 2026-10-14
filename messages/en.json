@@ -38,7 +38,6 @@
     "faq": "FAQ",
     "contact": "Contact Us",
     "contactCta": "Contact us",
-    "patientLogin": "Patient login",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "more": "More",
@@ -164,15 +163,14 @@
     "ctaHeading": "Have a question?",
     "ctaBody": "Contact the clinic team. Submitting an inquiry does not confirm an appointment.",
     "primaryCta": "Contact the clinic",
-    "icsiImageAlt": "3D scientific illustration of intracytoplasmic sperm injection (ICSI): a fine glass pipette delivering a sperm cell into an egg",
-    "icsiCaption": "Intracytoplasmic sperm injection (illustration)",
     "servicesCarouselLabel": "Our services",
     "servicesPrev": "Previous service",
     "servicesNext": "Next service",
     "servicesPosition": "Service {index} of {total}",
     "servicesSelected": "Showing",
     "servicesImagePending": "Image pending",
-    "servicesHint": "Use the arrows, swipe or drag to browse services"
+    "servicesHint": "Use the arrows, swipe or drag to browse services",
+    "servicesGoTo": "Go to service {page}"
   },
   "About": {
     "metaTitle": "About the clinic",
@@ -319,12 +317,6 @@
       "failed": "Sending failed. Please try again or call {phones}."
     },
     "honeypot": "Website (leave empty)"
-  },
-  "Portal": {
-    "loginMetaTitle": "Patient login",
-    "loginTitle": "Patient login",
-    "loginUnavailable": "The patient portal is not available yet. It will let patients manage their account and see the status of their own inquiries.",
-    "contactInstead": "To get in touch, please use the contact page."
   },
   "TranslationUnavailable": {
     "metaTitle": "Not available in this language",

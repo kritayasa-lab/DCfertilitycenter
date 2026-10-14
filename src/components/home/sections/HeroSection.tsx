@@ -10,71 +10,52 @@ import { VisionWords } from "../VisionWords";
 
 export const visionKeys = ["hope", "trust", "miracle"] as const;
 
-/*
- * Editorial placement of the vision words around the ICSI artwork (lg+).
- * The artwork's free areas are top-left, top-right and lower-right; the
- * numbered labels (01–03) make the clockwise reading order explicit.
- * Below lg the words form a centred row under the artwork.
+/**
+ * Keeps each registration number together with the surname before it, so
+ * "ว.23473" never wraps onto a line of its own. The text is unchanged.
  */
-const stagePlacements = [
-  "lg:absolute lg:left-0 lg:top-0",
-  "lg:absolute lg:right-0 lg:top-[4%] lg:items-end lg:text-right",
-  "lg:absolute lg:right-[3%] lg:bottom-[2%] lg:items-end lg:text-right",
-];
+function DoctorName({ name }: { name: string }) {
+  const match = name.match(/^(.*\s)(\S+\sว\.\d+)$/);
+  if (!match) return <>{name}</>;
+  return (
+    <>
+      {match[1]}
+      <span className="whitespace-nowrap">{match[2]}</span>
+    </>
+  );
+}
 
 /**
- * Section 1. Scientific ICSI artwork (supplied 3D render, shown unmodified)
- * as the visual anchor; vision words placed around it; doctors' credentials
- * in a separate strip below so they never overlap the words. The doctors'
- * photograph is the original file, framed with CSS only.
+ * Section 1: split editorial hero.
+ * Left: HOPE / TRUST / MIRACLE as one typographic group (MIRACLE largest)
+ * with the CTA. Right: the clinic's original photograph of both doctors
+ * (unmodified file; CSS framing only), with their credentials directly below.
+ * On large screens the photo column slides under the text column so the
+ * large MIRACLE overlaps the photo's lower-left edge (coat area, away from
+ * the faces). The photo's baked-in caption (top-right) is kept intact.
  */
 export async function HeroSection({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "Home" });
-  const { icsiHero, heroDoctors } = clinicAssets;
+  const { heroDoctors } = clinicAssets;
   const words = visionKeys.map((key) => ({ key, word: key.toUpperCase(), meaning: t(`vision.${key}`) }));
 
   return (
     <section
       aria-labelledby="hero-heading"
-      className="relative overflow-x-clip bg-[radial-gradient(ellipse_at_50%_42%,var(--color-gold-50)_0%,var(--color-background)_58%)]"
+      className="relative overflow-x-clip bg-[radial-gradient(ellipse_at_30%_45%,var(--color-gold-50)_0%,var(--color-background)_60%)]"
     >
-      <Container className="relative pt-12 pb-16 sm:pt-16 lg:pt-20 lg:pb-20">
-        <div className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <h1 id="hero-heading" className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-xs font-semibold text-accent-strong sm:text-sm">
-            <span lang="th">{clinicName("th")}</span>
-            <span aria-hidden="true" className="h-px w-6 bg-cta-gold-deep" />
-            <span lang="en" className="tracking-[0.24em] uppercase">
-              DC Fertility Center
-            </span>
-          </h1>
-        </div>
+      {/* The clinic name is in the logo; the heading stays available to assistive tech and search. */}
+      <h1 id="hero-heading" className="sr-only">
+        <span lang="th">{clinicName("th")}</span> · <span lang="en">DC Fertility Center</span>
+      </h1>
 
-        {/* Stage: artwork + vision words */}
-        <div className="relative mx-auto mt-10 max-w-6xl lg:mt-12 lg:px-4 lg:pt-24 lg:pb-16">
-          <figure className="relative mx-auto w-full max-w-5xl">
-            <Image
-              src={icsiHero.src}
-              alt={t("icsiImageAlt")}
-              width={icsiHero.width}
-              height={icsiHero.height}
-              preload
-              sizes="(min-width: 1024px) 1024px, 100vw"
-              // Display-only edge fade so the pipettes dissolve into the page (file unchanged).
-              className="h-auto w-full [mask-image:linear-gradient(90deg,transparent,#000_14%,#000_86%,transparent)] motion-safe:animate-float"
-            />
-            <figcaption className="mt-2 text-center text-[0.7rem] tracking-[0.18em] text-muted uppercase">
-              <span lang="en">ICSI</span>
-              <span aria-hidden="true"> · </span>
-              {t("icsiCaption")}
-            </figcaption>
-          </figure>
-          <VisionWords words={words} label={t("visionLabel")} placements={stagePlacements} />
-        </div>
-
-        <div className="mx-auto mt-4 flex max-w-2xl flex-col items-center text-center">
-          <p className="text-lg text-muted">{t("heroIntro")}</p>
-          <div className="mt-7 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
-            <ButtonLink href="/contact" variant="gold" size="lg">
+      <Container className="grid items-center gap-12 py-10 sm:py-14 lg:min-h-[calc(100svh-7rem)] lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-0 lg:py-10">
+        {/* Left: vision composition + CTA */}
+        <div className="relative z-10 flex flex-col items-center text-center">
+          <VisionWords words={words} label={t("visionLabel")} className="w-full max-w-[36rem]" />
+          <p className="mt-2 max-w-md text-lg text-muted">{t("heroIntro")}</p>
+          <div className="mt-7 flex w-full flex-col items-center justify-center gap-3 sm:w-auto sm:flex-row">
+            <ButtonLink href="/contact" variant="gold" size="lg" className="w-full sm:w-auto">
               {t("heroPrimaryCta")}
             </ButtonLink>
             <ButtonLink href="/services" variant="ghost" size="lg">
@@ -83,40 +64,39 @@ export async function HeroSection({ locale }: { locale: Locale }) {
           </div>
         </div>
 
-        {/* Doctors' credentials (exact supplied strings) */}
-        <div className="mx-auto mt-14 grid max-w-5xl items-center gap-6 rounded-3xl border border-border bg-surface/80 p-5 shadow-soft backdrop-blur sm:p-6 lg:grid-cols-[auto_1fr_1fr] lg:gap-8">
-          <div className="flex items-center gap-4 lg:block">
-            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border border-border sm:h-24 sm:w-24">
+        {/* Right: the two doctors + credentials */}
+        <div className="relative mx-auto w-full max-w-[30rem] lg:-ml-24 lg:max-w-[29rem] lg:justify-self-start">
+          <figure className="relative">
+            <span aria-hidden="true" className="absolute inset-0 translate-x-3 translate-y-3 rounded-[2rem] border border-cta-gold-deep/60" />
+            <div className="relative overflow-hidden rounded-[2rem] shadow-raised">
               <Image
                 src={heroDoctors.src}
                 alt={t("heroImageAlt")}
                 width={heroDoctors.width}
                 height={heroDoctors.height}
-                sizes="96px"
-                className="h-full w-full scale-[1.9] object-cover object-[48%_28%]"
-                style={{ transformOrigin: "48% 28%" }}
+                preload
+                sizes="(min-width: 1024px) 464px, (min-width: 640px) 480px, 100vw"
+                // Trims empty background on the left only; faces and the photo's caption stay intact.
+                className="aspect-[6/7] h-auto w-full object-cover object-right"
               />
             </div>
-            <p className="text-xs font-semibold text-accent-strong lg:hidden">{t("doctorsLabel")}</p>
-          </div>
-          <div className="lg:border-l lg:border-border lg:pl-8">
-            <p className="hidden text-xs font-semibold text-accent-strong lg:block">{t("doctorsLabel")}</p>
-            <ul className="space-y-1.5 lg:mt-2" lang="th">
+          </figure>
+
+          <div className="mt-6 border-t border-cta-gold-deep/50 pt-5 text-center lg:text-left">
+            <p className="text-xs font-semibold text-accent-strong">{t("doctorsLabel")}</p>
+            <ul className="mt-2 space-y-1" lang="th">
               {doctors.map((d) => (
-                <li key={d.slug} className="text-base font-semibold text-foreground sm:text-lg">
-                  {d.translations.th!.name}
+                <li key={d.slug} className="text-[clamp(1rem,4.2vw,1.125rem)] font-semibold text-foreground">
+                  <DoctorName name={d.translations.th!.name} />
                 </li>
               ))}
             </ul>
+            <ul className="mt-3 space-y-0.5 text-sm text-muted" lang="th">
+              {doctorSpecialties.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
           </div>
-          <ul
-            className="flex flex-col gap-1 border-t border-border pt-4 text-sm text-muted lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8"
-            lang="th"
-          >
-            {doctorSpecialties.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
         </div>
       </Container>
     </section>
