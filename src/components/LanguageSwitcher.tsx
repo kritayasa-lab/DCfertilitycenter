@@ -12,7 +12,13 @@ import { locales, type Locale } from "@/i18n/routing";
  * content pages without a published translation render an explicit
  * "not available in this language" state rather than another language.
  */
-export function LanguageSwitcher({ className }: { className?: string }) {
+export function LanguageSwitcher({
+  className,
+  compact = false,
+}: {
+  className?: string;
+  compact?: boolean;
+}) {
   const t = useTranslations("Common");
   const locale = useLocale();
   const router = useRouter();
@@ -35,7 +41,11 @@ export function LanguageSwitcher({ className }: { className?: string }) {
         onChange={onChange}
         disabled={isPending}
         aria-label={t("languageLabel")}
-        className="min-h-11 rounded-pill border border-border-strong bg-surface px-4 text-sm text-foreground"
+        className={
+          compact
+            ? "min-h-8 rounded-pill border border-border bg-surface px-3 text-xs text-foreground"
+            : "min-h-11 rounded-pill border border-border-strong bg-surface px-4 text-sm text-foreground"
+        }
       >
         {locales.map((value) => (
           <option key={value} value={value} lang={value}>

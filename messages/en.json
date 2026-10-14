@@ -15,16 +15,278 @@
     "provisionalName": "Provisional working name",
     "pendingVerification": "Pending verification",
     "placeholderBadge": "Placeholder",
-    "developmentBanner": "This website is under development. Clinic information shown here is a placeholder and has not been verified."
+    "draftBadge": "Draft",
+    "pendingContent": "Approved content pending",
+    "pendingContentBody": "This section will be completed once the clinic has supplied and approved the content.",
+    "developmentBanner": "This website is under development. Clinic information shown here is a placeholder and has not been verified.",
+    "readMore": "Read more",
+    "viewDetails": "View details",
+    "viewAll": "View all",
+    "breadcrumbLabel": "Breadcrumb",
+    "home": "Home"
+  },
+  "Nav": {
+    "mainLabel": "Main",
+    "about": "About",
+    "services": "Services",
+    "allServices": "All services",
+    "doctors": "Doctors",
+    "facilities": "Facilities",
+    "packages": "Packages",
+    "articles": "Articles",
+    "faq": "FAQ",
+    "contact": "Contact",
+    "contactCta": "Contact us",
+    "patientLogin": "Patient login",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "more": "More"
+  },
+  "Footer": {
+    "tagline": "Fertility consultation and care.",
+    "contactHeading": "Contact",
+    "quickLinks": "Quick links",
+    "servicesHeading": "Services",
+    "legalHeading": "Legal",
+    "languagesHeading": "Languages",
+    "phone": "Phone",
+    "email": "Email",
+    "line": "LINE",
+    "address": "Address",
+    "hours": "Opening hours",
+    "copyright": "© {year} {siteName}. All rights reserved.",
+    "medicalNote": "Information on this website is general in nature and is not a substitute for individual medical advice."
+  },
+  "Legal": {
+    "privacy": "Privacy notice",
+    "terms": "Terms of use",
+    "medicalDisclaimer": "Medical disclaimer",
+    "cookies": "Cookie information",
+    "draftNotice": "Draft template — this page has not been reviewed by legal counsel and must not be relied upon as the clinic's final policy.",
+    "lastUpdated": "Last updated",
+    "pendingDate": "[Date pending]",
+    "pendingSection": "[Content pending legal review]",
+    "privacySections": {
+      "controller": "Who we are (data controller)",
+      "collected": "Personal data we collect",
+      "purposes": "Why we use your data",
+      "legalBasis": "Legal basis for processing",
+      "sharing": "Who we share data with",
+      "crossBorder": "International transfers",
+      "retention": "How long we keep your data",
+      "rights": "Your rights under the PDPA",
+      "security": "How we protect your data",
+      "contact": "How to contact us about your data"
+    },
+    "termsSections": {
+      "acceptance": "Use of this website",
+      "information": "Nature of the information provided",
+      "inquiries": "Inquiries and appointments",
+      "intellectualProperty": "Intellectual property",
+      "liability": "Limitation of liability",
+      "changes": "Changes to these terms",
+      "law": "Governing law"
+    },
+    "disclaimerSections": {
+      "general": "General information only",
+      "noRelationship": "No doctor–patient relationship",
+      "outcomes": "No guarantee of outcomes",
+      "emergency": "Urgent medical concerns"
+    },
+    "disclaimerBody": {
+      "general": "Content on this website is provided for general information and does not constitute medical advice, diagnosis or treatment for any individual.",
+      "noRelationship": "Reading this website or submitting an inquiry does not create a doctor–patient relationship. Please consult a qualified healthcare professional about your individual situation.",
+      "outcomes": "Fertility treatment outcomes vary between individuals. Nothing on this website should be read as a guarantee of pregnancy or of any treatment result.",
+      "emergency": "If you have an urgent medical concern, please contact your nearest hospital or emergency service. Do not use this website's inquiry form for emergencies."
+    },
+    "cookieSections": {
+      "what": "What cookies are",
+      "used": "Cookies this website uses",
+      "choices": "Your choices"
+    },
+    "cookieBody": {
+      "used": "This development version of the website uses only cookies that are strictly necessary for it to function (for example, remembering your language). It does not use analytics or advertising cookies. This section will be updated if that changes."
+    }
   },
   "Home": {
     "metaTitle": "Home",
     "eyebrow": "Fertility care",
     "title": "A calm, informed start to your fertility journey",
-    "intro": "This page is a development preview of the site foundation. Clinic services, specialists and contact details will be published here once they have been supplied and verified by the clinic.",
+    "intro": "Clear information and a personal conversation with the clinic team, at your own pace.",
     "primaryCta": "Contact the clinic",
-    "primaryCtaPending": "Contact form available in a later phase",
-    "secondaryCta": "View design foundation"
+    "secondaryCta": "Explore services",
+    "aboutHeading": "Our approach to care",
+    "aboutBody": "[Clinic introduction and care philosophy — pending approved copy from the clinic.]",
+    "aboutLink": "About the clinic",
+    "servicesHeading": "Fertility services",
+    "servicesIntro": "Services will be listed here once confirmed by the clinic.",
+    "whyHeading": "Why choose the clinic",
+    "whyBody": "Only verifiable differentiators will be published here. Pending information from the clinic.",
+    "journeyHeading": "How getting in touch works",
+    "journeyIntro": "Contacting the clinic starts with an inquiry, not an instant booking.",
+    "journeySteps": {
+      "inquiry": {
+        "title": "Send an inquiry",
+        "body": "Share your contact details and how you would like to be contacted."
+      },
+      "contact": {
+        "title": "The clinic team contacts you",
+        "body": "A member of the team reviews your inquiry and gets in touch."
+      },
+      "arrange": {
+        "title": "Arrange a consultation",
+        "body": "Together you agree on a suitable time for a consultation."
+      }
+    },
+    "doctorsHeading": "Doctors and specialists",
+    "facilitiesHeading": "Facilities",
+    "packagesHeading": "Packages and promotions",
+    "articlesHeading": "Articles",
+    "faqHeading": "Frequently asked questions",
+    "ctaHeading": "Have a question?",
+    "ctaBody": "Contact the clinic team. Submitting an inquiry does not confirm an appointment."
+  },
+  "About": {
+    "metaTitle": "About the clinic",
+    "metaDescription": "About the clinic, its care philosophy and its team.",
+    "title": "About the clinic",
+    "intro": "[Clinic overview — pending approved copy from the clinic.]",
+    "philosophyHeading": "Care philosophy",
+    "teamHeading": "Our team",
+    "teamLink": "Meet the doctors",
+    "standardsHeading": "Facilities and standards",
+    "standardsBody": "Facilities, accreditations and standards will be listed here only once verified."
+  },
+  "Services": {
+    "metaTitle": "Services",
+    "metaDescription": "Fertility services offered by the clinic.",
+    "title": "Fertility services",
+    "intro": "The clinic will publish only the services it actually provides. The entries below are placeholders.",
+    "empty": "No services have been published yet.",
+    "introductionHeading": "About this service",
+    "suitabilityHeading": "Who it may be suitable for",
+    "processHeading": "General process",
+    "preparationHeading": "Consultation and preparation",
+    "faqHeading": "Questions about this service",
+    "disclaimer": "This information is general and does not replace individual medical advice. Suitability and outcomes vary from person to person and can only be assessed in consultation with a doctor.",
+    "otherServices": "Other services"
+  },
+  "Doctors": {
+    "metaTitle": "Doctors and specialists",
+    "metaDescription": "Doctors and specialists at the clinic.",
+    "title": "Doctors and specialists",
+    "intro": "Profiles will show verified qualifications and approved biographies only. The entries below are placeholders.",
+    "empty": "No profiles have been published yet.",
+    "photoPending": "Authorized photograph pending",
+    "roleHeading": "Role",
+    "qualificationsHeading": "Qualifications",
+    "expertiseHeading": "Areas of expertise",
+    "biographyHeading": "Biography",
+    "backToList": "All doctors"
+  },
+  "Facilities": {
+    "metaTitle": "Facilities",
+    "metaDescription": "The clinic's facilities.",
+    "title": "Facilities",
+    "intro": "Facilities and equipment will be described here once verified by the clinic.",
+    "empty": "No facilities have been published yet."
+  },
+  "Packages": {
+    "metaTitle": "Packages and promotions",
+    "metaDescription": "Current packages and promotions.",
+    "title": "Packages and promotions",
+    "intro": "Only current, clinic-approved packages are shown. Prices are published only when approved.",
+    "empty": "There are no active packages or promotions at the moment.",
+    "pricePending": "Price not published",
+    "priceLabel": "Price",
+    "validity": "Valid {from} – {until}",
+    "validUntil": "Valid until {until}",
+    "validityPending": "Validity dates pending",
+    "inclusionsHeading": "Included",
+    "exclusionsHeading": "Not included",
+    "termsHeading": "Terms and conditions",
+    "backToList": "All packages"
+  },
+  "Articles": {
+    "metaTitle": "Articles",
+    "metaDescription": "Articles and general information about fertility.",
+    "title": "Articles",
+    "intro": "General information to help you prepare questions for your consultation.",
+    "searchLabel": "Search articles",
+    "searchPlaceholder": "Search by title",
+    "searchButton": "Search",
+    "categoryLabel": "Category",
+    "allCategories": "All categories",
+    "categories": {
+      "fertility-basics": "Fertility basics",
+      "treatment-journey": "Treatment journey",
+      "clinic-news": "Clinic news"
+    },
+    "empty": "No articles match your search.",
+    "resultCount": "{count, plural, =0 {No articles} one {# article} other {# articles}}",
+    "medicalReviewPending": "Medical review pending",
+    "medicalReviewed": "Medically reviewed",
+    "generalInfoNotice": "This article provides general information only and is not individual medical advice. Please discuss your situation with a doctor.",
+    "publishedOn": "Published {date}",
+    "backToList": "All articles"
+  },
+  "Faq": {
+    "metaTitle": "Frequently asked questions",
+    "metaDescription": "Answers to common questions about contacting the clinic.",
+    "title": "Frequently asked questions",
+    "intro": "Answers to common questions. Medical questions are best discussed directly with a doctor.",
+    "empty": "No questions have been published yet.",
+    "answerPending": "Answer pending from the clinic."
+  },
+  "Contact": {
+    "metaTitle": "Contact",
+    "metaDescription": "Contact the clinic and send an inquiry.",
+    "title": "Contact the clinic",
+    "intro": "Send an inquiry and the clinic team will contact you to arrange a consultation.",
+    "detailsHeading": "Contact details",
+    "mapHeading": "Location and directions",
+    "mapPending": "A map will be shown once the clinic's address has been verified.",
+    "formHeading": "Inquiry form",
+    "formNotConnected": "The inquiry form is not connected yet. Submissions are disabled and nothing you type here is sent or stored.",
+    "formNotBooking": "Submitting an inquiry will not confirm an appointment. The clinic team will contact you to arrange one.",
+    "fields": {
+      "name": "Full name",
+      "preferredLanguage": "Preferred language",
+      "phone": "Phone number",
+      "phoneHint": "Include your country code, e.g. +66.",
+      "email": "Email (optional)",
+      "service": "Service of interest (optional)",
+      "serviceNone": "Not sure yet",
+      "contactMethod": "Preferred contact method",
+      "contactMethods": {
+        "phone": "Phone call",
+        "line": "LINE",
+        "email": "Email"
+      },
+      "callbackTime": "Preferred callback time (optional)",
+      "callbackTimes": {
+        "any": "Any time",
+        "morning": "Morning",
+        "afternoon": "Afternoon",
+        "evening": "Evening"
+      },
+      "privacy": "I have read the <privacyLink>privacy notice</privacyLink> and agree that the clinic may contact me about my inquiry.",
+      "dataMinimization": "Please do not include medical details. These can be discussed privately with the clinic."
+    },
+    "submit": "Send inquiry",
+    "submitDisabled": "Sending is not available yet"
+  },
+  "Portal": {
+    "loginMetaTitle": "Patient login",
+    "loginTitle": "Patient login",
+    "loginUnavailable": "The patient portal is not available yet. It will let patients manage their account and see the status of their own inquiries.",
+    "contactInstead": "To get in touch, please use the contact page."
+  },
+  "TranslationUnavailable": {
+    "metaTitle": "Not available in this language",
+    "title": "This page is not available in English",
+    "body": "We have not published this content in your selected language. It is available in:",
+    "backHome": "Back to home"
   },
   "Styleguide": {
     "metaTitle": "Design foundation",

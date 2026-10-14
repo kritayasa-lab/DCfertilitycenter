@@ -15,16 +15,278 @@
     "provisionalName": "开发阶段暂用名称",
     "pendingVerification": "待核实",
     "placeholderBadge": "占位内容",
-    "developmentBanner": "本网站正在开发中。此处显示的诊所信息为占位内容，尚未经过核实。"
+    "draftBadge": "草稿",
+    "pendingContent": "待审批内容",
+    "pendingContentBody": "诊所提供并审批内容后，本部分将予以完善。",
+    "developmentBanner": "本网站正在开发中。此处显示的诊所信息为占位内容，尚未经过核实。",
+    "readMore": "阅读更多",
+    "viewDetails": "查看详情",
+    "viewAll": "查看全部",
+    "breadcrumbLabel": "导航路径",
+    "home": "首页"
+  },
+  "Nav": {
+    "mainLabel": "主导航",
+    "about": "关于我们",
+    "services": "服务项目",
+    "allServices": "全部服务",
+    "doctors": "医生团队",
+    "facilities": "诊所设施",
+    "packages": "套餐",
+    "articles": "文章",
+    "faq": "常见问题",
+    "contact": "联系我们",
+    "contactCta": "联系我们",
+    "patientLogin": "患者登录",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单",
+    "more": "更多"
+  },
+  "Footer": {
+    "tagline": "生育咨询与护理服务。",
+    "contactHeading": "联系方式",
+    "quickLinks": "快速链接",
+    "servicesHeading": "服务项目",
+    "legalHeading": "法律信息",
+    "languagesHeading": "语言",
+    "phone": "电话",
+    "email": "电子邮箱",
+    "line": "LINE",
+    "address": "地址",
+    "hours": "营业时间",
+    "copyright": "© {year} {siteName} 版权所有。",
+    "medicalNote": "本网站信息仅供一般参考，不能替代个人医疗建议。"
+  },
+  "Legal": {
+    "privacy": "隐私声明",
+    "terms": "使用条款",
+    "medicalDisclaimer": "医疗免责声明",
+    "cookies": "Cookie 说明",
+    "draftNotice": "草稿模板——本页面尚未经过法律顾问审阅，不得作为诊所的最终政策依据。",
+    "lastUpdated": "最近更新",
+    "pendingDate": "[日期待定]",
+    "pendingSection": "[内容待法律审阅]",
+    "privacySections": {
+      "controller": "我们是谁（数据控制者）",
+      "collected": "我们收集的个人数据",
+      "purposes": "我们使用您数据的目的",
+      "legalBasis": "处理数据的法律依据",
+      "sharing": "我们与谁共享数据",
+      "crossBorder": "跨境传输",
+      "retention": "数据保存期限",
+      "rights": "您根据泰国《个人数据保护法》享有的权利",
+      "security": "我们如何保护您的数据",
+      "contact": "如何就您的数据联系我们"
+    },
+    "termsSections": {
+      "acceptance": "本网站的使用",
+      "information": "所提供信息的性质",
+      "inquiries": "咨询与预约",
+      "intellectualProperty": "知识产权",
+      "liability": "责任限制",
+      "changes": "条款变更",
+      "law": "适用法律"
+    },
+    "disclaimerSections": {
+      "general": "仅为一般信息",
+      "noRelationship": "不构成医患关系",
+      "outcomes": "不保证治疗结果",
+      "emergency": "紧急医疗情况"
+    },
+    "disclaimerBody": {
+      "general": "本网站内容仅供一般参考，不构成针对任何个人的医疗建议、诊断或治疗。",
+      "noRelationship": "浏览本网站或提交咨询并不构成医患关系。请就您的个人情况咨询具备资质的医疗专业人员。",
+      "outcomes": "生育治疗的结果因人而异。本网站的任何内容均不应被理解为对怀孕或任何治疗结果的保证。",
+      "emergency": "如遇紧急医疗情况，请联系最近的医院或急救服务。请勿通过本网站的咨询表单处理紧急情况。"
+    },
+    "cookieSections": {
+      "what": "什么是 Cookie",
+      "used": "本网站使用的 Cookie",
+      "choices": "您的选择"
+    },
+    "cookieBody": {
+      "used": "本网站开发版本仅使用网站正常运行所必需的 Cookie（例如记住您选择的语言），不使用分析或广告类 Cookie。如有变化，本部分将予以更新。"
+    }
   },
   "Home": {
     "metaTitle": "首页",
     "eyebrow": "生育健康服务",
     "title": "以安心、清晰的方式开启您的求子之路",
-    "intro": "本页面为网站基础框架的开发预览。诊所服务、医生及联系方式将在诊所提供并核实后在此发布。",
+    "intro": "清晰的信息，加上与诊所团队的个人沟通，按照您自己的节奏进行。",
     "primaryCta": "联系诊所",
-    "primaryCtaPending": "联系表单将在后续阶段开放",
-    "secondaryCta": "查看设计基础"
+    "secondaryCta": "了解服务项目",
+    "aboutHeading": "我们的护理理念",
+    "aboutBody": "[诊所简介与护理理念——待诊所审批内容。]",
+    "aboutLink": "关于诊所",
+    "servicesHeading": "生育服务",
+    "servicesIntro": "服务项目经诊所确认后将在此列出。",
+    "whyHeading": "为什么选择本诊所",
+    "whyBody": "此处仅发布可核实的优势信息，目前正待诊所提供。",
+    "journeyHeading": "联系流程",
+    "journeyIntro": "联系诊所从提交咨询开始，而非即时预约。",
+    "journeySteps": {
+      "inquiry": {
+        "title": "提交咨询",
+        "body": "留下您的联系方式及希望被联系的方式。"
+      },
+      "contact": {
+        "title": "诊所团队与您联系",
+        "body": "团队成员会查看您的咨询并与您联系。"
+      },
+      "arrange": {
+        "title": "安排咨询",
+        "body": "双方共同确定合适的咨询时间。"
+      }
+    },
+    "doctorsHeading": "医生与专家",
+    "facilitiesHeading": "诊所设施",
+    "packagesHeading": "套餐与优惠",
+    "articlesHeading": "文章",
+    "faqHeading": "常见问题",
+    "ctaHeading": "有疑问吗？",
+    "ctaBody": "欢迎联系诊所团队。提交咨询并不代表预约已确认。"
+  },
+  "About": {
+    "metaTitle": "关于诊所",
+    "metaDescription": "关于诊所、护理理念及团队。",
+    "title": "关于诊所",
+    "intro": "[诊所概况——待诊所审批内容。]",
+    "philosophyHeading": "护理理念",
+    "teamHeading": "我们的团队",
+    "teamLink": "认识我们的医生",
+    "standardsHeading": "设施与标准",
+    "standardsBody": "诊所设施、认证及标准仅在核实后于此列出。"
+  },
+  "Services": {
+    "metaTitle": "服务项目",
+    "metaDescription": "诊所提供的生育服务。",
+    "title": "生育服务",
+    "intro": "诊所仅会发布实际提供的服务。以下条目为占位内容。",
+    "empty": "暂无已发布的服务项目。",
+    "introductionHeading": "服务介绍",
+    "suitabilityHeading": "适合人群",
+    "processHeading": "一般流程",
+    "preparationHeading": "咨询与准备",
+    "faqHeading": "关于此服务的问题",
+    "disclaimer": "以上信息仅供一般参考，不能替代个人医疗建议。是否适合以及治疗结果因人而异，须经医生面诊评估。",
+    "otherServices": "其他服务"
+  },
+  "Doctors": {
+    "metaTitle": "医生与专家",
+    "metaDescription": "诊所的医生与专家。",
+    "title": "医生与专家",
+    "intro": "医生简介仅展示经核实的资质与经审批的个人介绍。以下条目为占位内容。",
+    "empty": "暂无已发布的医生简介。",
+    "photoPending": "待提供授权照片",
+    "roleHeading": "职务",
+    "qualificationsHeading": "资质",
+    "expertiseHeading": "专长领域",
+    "biographyHeading": "个人简介",
+    "backToList": "全部医生"
+  },
+  "Facilities": {
+    "metaTitle": "诊所设施",
+    "metaDescription": "诊所的设施。",
+    "title": "诊所设施",
+    "intro": "诊所设施及设备经核实后将在此介绍。",
+    "empty": "暂无已发布的设施信息。"
+  },
+  "Packages": {
+    "metaTitle": "套餐与优惠",
+    "metaDescription": "当前的套餐与优惠。",
+    "title": "套餐与优惠",
+    "intro": "仅显示当前有效且经诊所审批的套餐。价格仅在审批后公布。",
+    "empty": "目前没有有效的套餐或优惠。",
+    "pricePending": "价格未公布",
+    "priceLabel": "价格",
+    "validity": "有效期 {from} – {until}",
+    "validUntil": "有效期至 {until}",
+    "validityPending": "有效期待定",
+    "inclusionsHeading": "包含项目",
+    "exclusionsHeading": "不包含项目",
+    "termsHeading": "条款与条件",
+    "backToList": "全部套餐"
+  },
+  "Articles": {
+    "metaTitle": "文章",
+    "metaDescription": "关于生育的文章与一般信息。",
+    "title": "文章",
+    "intro": "一般性信息，帮助您为面诊准备问题。",
+    "searchLabel": "搜索文章",
+    "searchPlaceholder": "按标题搜索",
+    "searchButton": "搜索",
+    "categoryLabel": "分类",
+    "allCategories": "全部分类",
+    "categories": {
+      "fertility-basics": "生育基础知识",
+      "treatment-journey": "治疗历程",
+      "clinic-news": "诊所动态"
+    },
+    "empty": "没有符合搜索条件的文章。",
+    "resultCount": "{count, plural, =0 {暂无文章} other {共 # 篇文章}}",
+    "medicalReviewPending": "待医学审核",
+    "medicalReviewed": "已经医学审核",
+    "generalInfoNotice": "本文仅提供一般信息，并非个人医疗建议。请与医生讨论您的具体情况。",
+    "publishedOn": "发布于 {date}",
+    "backToList": "全部文章"
+  },
+  "Faq": {
+    "metaTitle": "常见问题",
+    "metaDescription": "关于联系诊所的常见问题解答。",
+    "title": "常见问题",
+    "intro": "常见问题解答。医疗相关问题建议直接咨询医生。",
+    "empty": "暂无已发布的问题。",
+    "answerPending": "答案待诊所提供。"
+  },
+  "Contact": {
+    "metaTitle": "联系我们",
+    "metaDescription": "联系诊所并提交咨询。",
+    "title": "联系诊所",
+    "intro": "提交咨询后，诊所团队会与您联系并安排面诊。",
+    "detailsHeading": "联系方式",
+    "mapHeading": "位置与交通",
+    "mapPending": "诊所地址核实后将显示地图。",
+    "formHeading": "咨询表单",
+    "formNotConnected": "咨询表单尚未开通。提交功能已停用，您在此输入的任何内容都不会被发送或保存。",
+    "formNotBooking": "提交咨询并不代表预约已确认。诊所团队会与您联系安排预约。",
+    "fields": {
+      "name": "姓名",
+      "preferredLanguage": "首选语言",
+      "phone": "电话号码",
+      "phoneHint": "请包含国家区号，例如 +66。",
+      "email": "电子邮箱（选填）",
+      "service": "感兴趣的服务（选填）",
+      "serviceNone": "暂不确定",
+      "contactMethod": "首选联系方式",
+      "contactMethods": {
+        "phone": "电话",
+        "line": "LINE",
+        "email": "电子邮件"
+      },
+      "callbackTime": "方便回电的时间（选填）",
+      "callbackTimes": {
+        "any": "任何时间",
+        "morning": "上午",
+        "afternoon": "下午",
+        "evening": "傍晚"
+      },
+      "privacy": "我已阅读<privacyLink>隐私声明</privacyLink>，并同意诊所就我的咨询与我联系。",
+      "dataMinimization": "请勿在此填写医疗信息，相关细节可与诊所私下沟通。"
+    },
+    "submit": "提交咨询",
+    "submitDisabled": "暂不可提交"
+  },
+  "Portal": {
+    "loginMetaTitle": "患者登录",
+    "loginTitle": "患者登录",
+    "loginUnavailable": "患者门户尚未开放。开放后，患者可管理账户并查看本人咨询的处理状态。",
+    "contactInstead": "如需联系诊所，请使用联系页面。"
+  },
+  "TranslationUnavailable": {
+    "metaTitle": "暂无此语言版本",
+    "title": "本页面暂无简体中文版本",
+    "body": "此内容尚未以您选择的语言发布。目前提供以下语言版本：",
+    "backHome": "返回首页"
   },
   "Styleguide": {
     "metaTitle": "设计基础",

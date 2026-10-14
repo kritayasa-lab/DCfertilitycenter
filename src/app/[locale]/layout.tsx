@@ -4,6 +4,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { locale as rootLocale } from "next/root-params";
 import { DevelopmentBanner } from "@/components/DevelopmentBanner";
+import { Footer } from "@/components/layout/Footer";
+import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/SkipLink";
 import { allowIndexing, displayValue, siteConfig } from "@/config/site";
 import { htmlLang, isLocale, locales, ogLocale } from "@/i18n/routing";
@@ -53,7 +55,9 @@ export default async function LocaleLayout({ children }: LayoutProps<"/[locale]"
         <NextIntlClientProvider>
           <SkipLink />
           <DevelopmentBanner />
+          <Header locale={locale} />
           {children}
+          <Footer locale={locale} />
         </NextIntlClientProvider>
       </body>
     </html>

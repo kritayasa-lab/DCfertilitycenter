@@ -127,6 +127,8 @@
     font-weight: 600;
     line-height: 1.2;
     text-wrap: balance;
+    /* Cormorant defaults to old-style figures, which look undersized next to Thai/CJK glyphs. */
+    font-variant-numeric: lining-nums;
   }
   html[lang="th"] :is(h1, h2, h3) {
     line-height: 1.4;
