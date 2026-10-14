@@ -22,7 +22,6 @@ const pages = [
   "/th/contact",
   "/en/privacy",
   "/zh-CN/medical-disclaimer",
-  "/en/portal/login",
 ];
 
 for (const path of pages) {

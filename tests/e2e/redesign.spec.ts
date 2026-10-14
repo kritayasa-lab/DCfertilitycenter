@@ -20,7 +20,7 @@ test.describe("header navigation", () => {
         lis.map((li) => li.querySelector("a, button")!.textContent!.trim()),
       );
       expect(labelsShown).toEqual([...labels]);
-      // Patient login is outside the primary navigation; admin is never linked.
+      // No login entries in the primary navigation; admin is never linked.
       await expect(page.getByRole("navigation").first().getByText(/login|เข้าสู่ระบบ|登录/i)).toHaveCount(0);
       await expect(page.locator('a[href*="/admin"]')).toHaveCount(0);
     });
@@ -281,7 +281,7 @@ test.describe("original assets", () => {
     expect(fit).toBe("contain"); // intrinsic aspect ratio; never stretched or cropped into
 
     const heroImg = page.locator("section[aria-labelledby=hero-heading] figure img");
-    await expect(heroImg).toHaveAttribute("src", /hero%2Ficsi-hero\.png/);
+    await expect(heroImg).toHaveAttribute("src", /doctors%2Fhero-doctors\.jpg/);
     const doctorsImg = page.locator("section[aria-labelledby=hero-heading] img[src*='hero-doctors']");
     await expect(doctorsImg).toHaveCount(1);
     const why = page.locator("section[aria-labelledby=why-heading] img");

@@ -29,7 +29,6 @@ const staticPaths = [
   "/terms",
   "/medical-disclaimer",
   "/cookies",
-  "/portal/login",
 ];
 
 test.describe("every public route renders in every locale", () => {
@@ -87,13 +86,15 @@ test.describe("header navigation", () => {
     await expect(page.getByRole("button", { name: "เปิดเมนู" })).toHaveAttribute("aria-expanded", "false");
   });
 
-  test("patient login is separate from staff access and clearly unavailable", async ({ page, isMobile }) => {
-    test.skip(isMobile, "desktop header link");
+  test("there is no patient login: no header link, no utility bar, no portal route", async ({ page, request }) => {
     await page.goto("/en");
-    await page.getByRole("banner").getByRole("link", { name: "Patient login" }).click();
-    await expect(page).toHaveURL(/\/en\/portal\/login$/);
-    await expect(page.getByRole("note").filter({ hasText: "not available yet" })).toBeVisible();
-    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+    await expect(page.getByRole("link", { name: /patient login/i })).toHaveCount(0);
+    await expect(page.locator('a[href*="/portal"]')).toHaveCount(0);
+    // The header is a single row: logo, navigation, language switcher.
+    await expect(page.getByRole("banner").locator(":scope > div")).toHaveCount(1);
+    for (const locale of ["th", "en", "zh-CN"]) {
+      expect((await request.get(`/${locale}/portal/login`)).status()).toBe(404);
+    }
   });
 });
 

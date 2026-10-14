@@ -77,39 +77,76 @@ test.describe("champagne-gold CTA", () => {
   });
 });
 
+test.describe("header", () => {
+  test("logo is a refined 150–180px on desktop and smaller on phones", async ({ page, isMobile }) => {
+    await page.goto("/th");
+    const img = page.getByRole("banner").getByRole("link", { name: /หน้าแรก/ }).first().locator("img");
+    const frame = img.locator("..");
+    const width = await frame.evaluate((el) => el.getBoundingClientRect().width);
+    if (isMobile) expect(width).toBeLessThanOrEqual(152);
+    else {
+      expect(width).toBeGreaterThanOrEqual(150);
+      expect(width).toBeLessThanOrEqual(180);
+    }
+  });
+});
+
 test.describe("hero composition", () => {
-  test("ICSI artwork anchors the hero; no decorative circles; credentials do not overlap the words", async ({ page, isMobile }) => {
+  test("split layout: vision group left, doctors' photo right with credentials beneath", async ({ page, isMobile }) => {
     await page.goto("/en");
     const hero = page.locator("section[aria-labelledby=hero-heading]");
-    await expect(hero.locator("figure img")).toHaveAttribute("alt", /ICSI/);
+    // The visible clinic-name caption is gone (the name is in the logo); the h1 stays for assistive tech.
+    await expect(hero.locator("h1")).toHaveClass(/sr-only/);
     await expect(hero.locator(".rounded-full.blur-3xl, svg circle")).toHaveCount(0);
 
     const words = hero.getByRole("button", { name: /^(HOPE|TRUST|MIRACLE)$/ });
-    await expect(words).toHaveText(["HOPE", "TRUST", "MIRACLE"]); // reading order in the DOM
-    const strip = hero.getByText("รศ.นพ.ชัยณรงค์ โชคสุชาติ ว.23473", { exact: true });
-    const stripBox = (await strip.boundingBox())!;
-    for (const word of await words.all()) {
-      const box = (await word.boundingBox())!;
-      const overlaps = !(box.y + box.height <= stripBox.y || stripBox.y + stripBox.height <= box.y || box.x + box.width <= stripBox.x || stripBox.x + stripBox.width <= box.x);
-      expect(overlaps, `${await word.textContent()} overlaps credentials`).toBe(false);
-    }
+    await expect(words).toHaveText(["HOPE", "TRUST", "MIRACLE"]);
+    const [hope, trust, miracle] = await Promise.all((await words.all()).map(async (w) => (await w.boundingBox())!));
+    // MIRACLE is the strongest statement, below HOPE/TRUST and centred under them.
+    expect(miracle.height).toBeGreaterThan(hope.height * 1.6);
+    expect(miracle.y).toBeGreaterThan(hope.y);
+    const groupCentre = (hope.x + trust.x + trust.width) / 2;
+    expect(Math.abs(miracle.x + miracle.width / 2 - groupCentre)).toBeLessThan(40);
+
+    const photo = (await hero.locator("figure img").boundingBox())!;
+    const credentials = (await hero.getByText("รศ.นพ.ชัยณรงค์ โชคสุชาติ ว.23473", { exact: true }).boundingBox())!;
+    expect(credentials.y).toBeGreaterThan(photo.y + photo.height); // directly below the photo
+
     if (!isMobile) {
-      // Desktop: words sit around the artwork (above-left, above-right, lower-right).
-      const art = (await hero.locator("figure img").boundingBox())!;
-      const [hope, trust, miracle] = await Promise.all((await words.all()).map(async (w) => (await w.boundingBox())!));
-      expect(hope.x + hope.width / 2).toBeLessThan(art.x + art.width / 2);
-      expect(trust.x + trust.width / 2).toBeGreaterThan(art.x + art.width / 2);
-      expect(miracle.y).toBeGreaterThan(hope.y);
+      // All three words are inside the initial desktop viewport (1280×720).
+      const viewport = page.viewportSize()!;
+      for (const box of [hope, trust, miracle]) expect(box.y + box.height).toBeLessThanOrEqual(viewport.height);
+      // Words on the left; MIRACLE overlaps the photo's left edge slightly, below the faces.
+      expect(hope.x).toBeLessThan(photo.x);
+      expect(miracle.x + miracle.width).toBeGreaterThan(photo.x);
+      expect(miracle.x + miracle.width - photo.x).toBeLessThan(photo.width * 0.25);
+      expect(miracle.y).toBeGreaterThan(photo.y + photo.height * 0.4);
+    } else {
+      // Stacked: words, then photo, then credentials; no overlap on phones.
+      expect(photo.y).toBeGreaterThan(miracle.y + miracle.height);
+    }
+  });
+
+  test("registration numbers stay on the same line as the surname", async ({ page }) => {
+    for (const width of [390, 820, 1280]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/th");
+      const pairs = page.locator("section[aria-labelledby=hero-heading] li span.whitespace-nowrap");
+      await expect(pairs).toHaveText(["โชคสุชาติ ว.23473", "ประทีปชัยกูร ว.51688"]);
+      for (const pair of await pairs.all()) {
+        const lines = await pair.evaluate((el) => el.getClientRects().length);
+        expect(lines, `width ${width}`).toBe(1);
+      }
     }
   });
 });
 
 test("Thai text is never letter-spaced, even inside tracked labels", async ({ page }) => {
   await page.goto("/th");
-  const caption = page.locator("section[aria-labelledby=hero-heading] figcaption");
-  expect(await caption.evaluate((el) => getComputedStyle(el).letterSpacing)).toMatch(/^(normal|0px)$/);
+  const heading = page.getByRole("contentinfo").locator("h2").first();
+  expect(await heading.evaluate((el) => getComputedStyle(el).letterSpacing)).toMatch(/^(normal|0px)$/);
   await page.goto("/en");
-  expect(await caption.evaluate((el) => getComputedStyle(el).letterSpacing)).not.toMatch(/^(normal|0px)$/);
+  expect(await heading.evaluate((el) => getComputedStyle(el).letterSpacing)).not.toMatch(/^(normal|0px)$/);
 });
 
 test.describe("services arc carousel", () => {
@@ -147,6 +184,20 @@ test.describe("services arc carousel", () => {
     await expect(activeTitle(page)).toHaveText("Preimplantation genetic testing (PGT)");
     await page.keyboard.press("Enter");
     await expect(page).toHaveURL(/\/en\/services\/pgt$/);
+  });
+
+  test("pagination dots match the Packages carousel and jump to a service", async ({ page }) => {
+    await page.goto("/en");
+    await page.waitForLoadState("networkidle");
+    const section = page.locator("section[aria-labelledby=services-heading]");
+    const dots = section.getByRole("button", { name: /Go to service/ });
+    await expect(dots).toHaveCount(6);
+    await expect(dots.first()).toHaveAttribute("aria-current", "true");
+    await dots.nth(3).click();
+    await expect(activeTitle(page)).toHaveText("Surgical sperm retrieval (PESA/TESE)");
+    await expect(dots.nth(3)).toHaveAttribute("aria-current", "true");
+    await section.getByRole("button", { name: "Next service" }).click();
+    await expect(dots.nth(4)).toHaveAttribute("aria-current", "true");
   });
 
   test("clicking a side card centres it first instead of navigating", async ({ page }) => {
