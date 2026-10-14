@@ -24,7 +24,18 @@ export const clinicAssets = {
     height: 1609,
     sha256: "3f18e9ee9a154cbc24a8774dc677e983b7d5ff0156bb0f4b73f3ebf2618bc079",
   },
-  /** Hero photograph of both doctors. Contains the clinic's own baked-in caption. */
+  /**
+   * Hero centrepiece: 3D scientific artwork of ICSI (oocyte, holding pipette,
+   * injection pipette with sperm). Transparent PNG supplied by the clinic owner.
+   */
+  icsiHero: {
+    src: "/images/hero/icsi-hero.png",
+    original: "/images/การปฏิสนธิไข่ด้วยเทคนิค ICSI.png",
+    width: 1774,
+    height: 887,
+    sha256: "e1d0ac9a5edbd6b0582ed89b562b21690cde6101dd477979bc97982d0bcd14c9",
+  },
+  /** Photograph of both doctors. Contains the clinic's own baked-in caption. */
   heroDoctors: {
     src: "/images/doctors/hero-doctors.jpg",
     original: "/images/IMG_7370.JPG",
