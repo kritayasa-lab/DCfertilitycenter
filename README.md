@@ -36,7 +36,7 @@ npm run dev                  # http://localhost:3000 → redirects to /th
 | `npm run lint` | ESLint |
 | `npm run typecheck` | Generate route types and run `tsc --noEmit` |
 | `npm test` | Vitest unit tests (`tests/unit`) |
-| `npm run test:e2e` | Playwright tests against the production build (run `npm run build` first) |
+| `npm run test:e2e` | Playwright tests incl. axe accessibility scans, against the production build (run `npm run build` first) |
 | `npm run check` | lint + typecheck + unit tests |
 
 Playwright downloads its own Chromium with `npx playwright install chromium`. In environments with a
@@ -55,6 +55,9 @@ messages/            UI strings per locale (th, en, zh-CN) — keys must match a
 src/app/[locale]/    All public routes (root layout lives here)
 src/app/globals.css  Design tokens (palette, semantic colours, fonts, radius, shadows)
 src/components/ui/   Shared UI primitives (Button, Card, Badge, Notice, Section, ...)
+src/components/layout/  Header, Footer, navigation (dropdown, mobile menu)
+src/components/content/ Page building blocks (PageHeader, EntryCard, FaqList, LegalPage, ...)
+src/content/         Content types, placeholder fixtures and query functions
 src/config/site.ts   Single source of clinic facts with verification status
 src/i18n/            Locale routing, request config, locale-aware navigation
 src/proxy.ts         Locale redirect (Next.js 16 "proxy", formerly middleware)

@@ -1,14 +1,14 @@
 # Architecture
 
-Status: **Phase 1 (foundation)**. Later sections describe the approved plan and are marked as such.
+Status: **Phase 2 (public website)**. Later sections describe the approved plan and are marked as such.
 
 ## Phases
 
 | Phase | Scope | Status |
 |---|---|---|
 | 0 | Repository audit, architecture proposal | Done |
-| 1 | Foundation: Next.js, design tokens, i18n routing, UI primitives, tests, CI | **This phase** |
-| 2 | Public website pages, Header/Footer, SEO | Planned |
+| 1 | Foundation: Next.js, design tokens, i18n routing, UI primitives, tests, CI | Done |
+| 2 | Public website pages, Header/Footer, SEO | **This phase** |
 | 3 | Supabase Auth/Postgres, roles, RLS, DB policy tests | Planned (needs approved Supabase project) |
 | 4 | Admin dashboard and CMS | Planned |
 | 5 | Patient portal (account, profile, own inquiries only) | Planned |
@@ -56,6 +56,54 @@ recommendations, automated appointment confirmation.
   Noto Serif Thai (Thai display), all self-hosted via `next/font`. Simplified Chinese uses
   system fonts (PingFang SC / Microsoft YaHei / Noto Sans SC) to avoid multi-MB CJK downloads.
   Thai and Chinese get a taller line height.
+
+## Route map
+
+All routes are prefixed with `/<locale>` (`th`, `en`, `zh-CN`).
+
+| Area | Routes | Access |
+|---|---|---|
+| Public | `/`, `/about`, `/services`, `/services/[slug]`, `/doctors`, `/doctors/[slug]`, `/facilities`, `/packages`, `/packages/[slug]`, `/articles` (`?category=`, `?q=`), `/articles/[slug]`, `/faq`, `/contact`, `/privacy`, `/terms`, `/medical-disclaimer`, `/cookies` | Anyone |
+| Patient portal | `/portal/login` (placeholder only in Phase 2); `/portal/*` from Phase 5 | Patients (Phase 3/5) |
+| Admin | `/admin/*` (approved convention, from Phase 3/4) | Staff/admin only |
+| Internal | `/styleguide` | `noindex`; remove or protect before production |
+
+The `/[locale]/admin` decision changes only the URL shape. Authorization never depends on the URL
+prefix: every admin and portal route and Server Action will check the session and role on the server
+(and RLS in the database). Portal and admin get separate layouts, separate login pages, and no
+shared dashboard. The public header links only to the patient login; staff use `/<locale>/admin/login`.
+
+## Public content model (Phase 2)
+
+- Types: `src/content/types.ts`. Each record = base fields (`slug`, `published`, `placeholder`,
+  `sortOrder`) + per-locale `translations` with a `status` (`draft` / `in_review` / `approved`).
+  Pending fields are `null` and render as a visible "approved content pending" block (`PendingBlock`).
+- Data: typed placeholder fixtures in `src/content/fixtures/*`, read **only** through
+  `src/content/queries.ts`. Phase 4 swaps the query implementations for CMS reads; pages don't change.
+- `localize(record, locale)` never falls back to another language. Detail pages without a translation
+  render `TranslationUnavailable` (`noindex`, links to the languages that exist); listings and the
+  sitemap omit them; hreflang lists only existing translations.
+- Packages: `listActivePackages` / `getActivePackage` filter by `published` and the validity window
+  in the clinic time zone (Asia/Bangkok). They are cached with `cacheLife("hours")`, so an expired
+  promotion disappears within an hour without a redeploy. Expired detail URLs return 404.
+- Articles: `medicalReview` metadata (`required`, `status`, `reviewedAt`); a "medical review pending"
+  badge and a general-information notice are shown until review is recorded.
+- Search and filter on `/articles` use GET parameters (works without JavaScript). Reading
+  `searchParams` happens inside `<Suspense>`, so the unfiltered list is still prerendered.
+
+## Shared layout
+
+`Header` (logo placeholder, main nav with an accessible Services dropdown, language switcher, patient
+login, contact CTA, mobile disclosure menu), `Footer` (centralized contact details from
+`site.ts`, quick/service/legal/language links). Contact details are never hardcoded in pages.
+Client JavaScript is limited to: language switcher, nav dropdown, mobile menu, active-link state.
+
+## SEO
+
+Per-page localized title/description, canonical, hreflang alternates (+ `x-default` → `th`), Open
+Graph (`og:locale` + alternates), `sitemap.xml` (all locales, alternates, excludes expired, untranslated,
+internal and portal pages), `robots.txt`. Structured data (e.g. `MedicalClinic`) is **intentionally
+omitted** until the clinic's name, address and contact details are verified.
 
 ## Clinic facts
 
