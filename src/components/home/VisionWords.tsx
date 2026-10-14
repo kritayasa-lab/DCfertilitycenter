@@ -67,7 +67,9 @@ export function VisionWords({
               key={w.key}
               className={
                 editorial
-                  ? cn("flex flex-col items-center", index === 2 && "basis-full")
+                  ? // Tight leading lets MIRACLE's glyph area overflow upward; keeping the
+                    // first row above it means hovering HOPE/TRUST never hits MIRACLE.
+                    cn("relative flex flex-col items-center", index < 2 ? "z-[1]" : "basis-full")
                   : "flex items-center gap-3"
               }
             >
