@@ -41,8 +41,8 @@ export function VisionWords({
     cn(
       "relative cursor-pointer rounded-md leading-[0.9] text-foreground transition-[transform,color] duration-500 ease-[cubic-bezier(0.22,0.61,0.36,1)] origin-center",
       "after:absolute after:-bottom-1.5 after:left-0 after:h-[2px] after:w-full after:origin-center after:scale-x-0 after:bg-cta-gold-deep after:transition-transform after:duration-500",
-      "hover:scale-[1.05] hover:text-primary hover:after:scale-x-100 focus-visible:scale-[1.05] focus-visible:text-primary focus-visible:after:scale-x-100",
-      "data-[active]:scale-[1.05] data-[active]:text-primary data-[active]:after:scale-x-100",
+      "hover:scale-[1.06] hover:text-primary hover:after:scale-x-100 focus-visible:scale-[1.06] focus-visible:text-primary focus-visible:after:scale-x-100",
+      "data-[active]:scale-[1.06] data-[active]:text-primary data-[active]:after:scale-x-100",
       index === 2
         ? // MIRACLE: the strongest statement: larger, lighter, wider-set.
           "font-light tracking-[-0.045em] text-[clamp(3.6rem,15.5vw,9.25rem)] lg:text-[clamp(5.5rem,9.4vw,9.25rem)]"
