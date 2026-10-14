@@ -1,8 +1,6 @@
-import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { cacheLife } from "next/cache";
 import { Container } from "@/components/ui/Container";
-import { clinicAssets } from "@/config/assets";
 import { footerNav, legalNav } from "@/config/navigation";
 import { clinicName, siteConfig, telHref, verifiedValue } from "@/config/site";
 import { Link } from "@/i18n/navigation";
@@ -35,7 +33,6 @@ export async function Footer({ locale }: { locale: Locale }) {
   const phones = verifiedValue(contact.phones) ?? [];
   const address = verifiedValue(contact.address);
   const mapUrl = verifiedValue(contact.mapUrl);
-  const { logo } = clinicAssets;
 
   const linkClass = "text-sm text-on-inverse/85 underline-offset-4 hover:text-on-inverse hover:underline";
   const headingClass = "text-xs font-semibold tracking-[0.18em] text-accent uppercase";
@@ -44,19 +41,13 @@ export async function Footer({ locale }: { locale: Locale }) {
     <footer className="mt-auto bg-surface-inverse text-on-inverse">
       <Container className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <div className="inline-block rounded-xl bg-surface-muted px-4 py-2">
-            <span className="relative block aspect-[1593/640] w-[200px] overflow-hidden">
-              <Image
-                src={logo.src}
-                alt={tCommon("logoAlt", { name })}
-                width={logo.width}
-                height={logo.height}
-                quality={90}
-                sizes="200px"
-                className="absolute inset-0 h-full w-full object-cover object-[50%_53%]"
-              />
-            </span>
-          </div>
+          {/*
+            The original logo's dark-teal wordmark has 2.3:1 contrast on this dark
+            footer, and a card behind it is not wanted, so the footer identifies
+            the clinic by name in text. The logo appears in the header.
+          */}
+          <p className="text-2xl font-semibold tracking-tight">{name}</p>
+          <p className="mt-1 text-sm text-on-inverse/75">{t("tagline")}</p>
 
           <h2 className={`${headingClass} mt-8`}>{t("contactHeading")}</h2>
           <address className="mt-4 space-y-3 not-italic">
