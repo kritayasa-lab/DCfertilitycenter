@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+/*
+ * Design tokens — PROVISIONAL visual direction (approved for development).
+ * Warm ivory/sand base, deep teal-green primary, soft blush accent.
+ * These are not the clinic's official brand colours. To re-brand, change the
+ * palette scales below; components only use the semantic tokens.
+ */
+@theme {
+  /* ---------- Palette scales ---------- */
+  --color-ivory-50: #fdfbf7;
+  --color-ivory-100: #faf6ef;
+
+  --color-sand-100: #f4ede2;
+  --color-sand-200: #e9dfcf;
+  --color-sand-300: #d9c9b1;
+  --color-sand-500: #a8916f;
+  --color-sand-700: #6e5c43;
+
+  --color-teal-50: #eef6f4;
+  --color-teal-100: #d5e9e5;
+  --color-teal-200: #a9d1c9;
+  --color-teal-500: #3d8075;
+  --color-teal-600: #2a6a60;
+  --color-teal-700: #1f574f;
+  --color-teal-800: #18453f;
+  --color-teal-900: #11332f;
+
+  --color-blush-50: #fcf3f1;
+  --color-blush-100: #f7e3df;
+  --color-blush-200: #efcbc4;
+  --color-blush-400: #d99a90;
+  --color-blush-700: #9b4c45;
+
+  --color-ink-900: #1d2726;
+  --color-ink-700: #3a4644;
+  --color-ink-600: #4f5b59;
+
+  /* ---------- Semantic tokens (use these in components) ---------- */
+  --color-background: var(--color-ivory-50);
+  --color-surface: #ffffff;
+  --color-surface-muted: var(--color-sand-100);
+  --color-surface-accent: var(--color-blush-50);
+  --color-foreground: var(--color-ink-900);
+  --color-muted: var(--color-ink-600);
+  --color-border: var(--color-sand-200);
+  --color-border-strong: var(--color-sand-300);
+
+  --color-primary: var(--color-teal-700);
+  --color-primary-hover: var(--color-teal-800);
+  --color-primary-soft: var(--color-teal-50);
+  --color-on-primary: #ffffff;
+
+  --color-accent: var(--color-blush-200);
+  --color-accent-soft: var(--color-blush-100);
+  --color-accent-strong: var(--color-blush-700);
+
+  --color-focus: var(--color-teal-500);
+  --color-danger: #a8322d;
+  --color-danger-soft: #fbeceb;
+  --color-success: #2f6b3a;
+  --color-success-soft: #eaf4ec;
+  --color-warning: #8a5a00;
+  --color-warning-soft: #fdf3dc;
+
+  /* ---------- Typography ---------- */
+  /*
+   * Latin text uses the first family; Thai glyphs fall through to the Noto
+   * Thai families; Simplified Chinese uses well-hinted system fonts (avoids
+   * multi-megabyte CJK web-font downloads).
+   */
+  --font-sans:
+    var(--font-noto-sans), var(--font-noto-sans-thai), "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", system-ui,
+    sans-serif;
+  --font-display:
+    var(--font-cormorant), var(--font-noto-serif-thai), "Songti SC",
+    "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
+
+  /* ---------- Radius ---------- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-pill: 999px;
+
+  /* ---------- Elevation ---------- */
+  --shadow-soft: 0 1px 2px rgb(29 39 38 / 0.04), 0 2px 8px rgb(29 39 38 / 0.04);
+  --shadow-card: 0 1px 2px rgb(29 39 38 / 0.05), 0 8px 24px rgb(29 39 38 / 0.06);
+  --shadow-raised: 0 4px 12px rgb(29 39 38 / 0.08), 0 16px 40px rgb(29 39 38 / 0.08);
+
+  /* ---------- Layout ---------- */
+  --container-content: 72rem;
+  --container-prose: 42rem;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    line-height: 1.65;
+  }
+
+  /* Thai and Chinese scripts need more vertical room than Latin text. */
+  html[lang="th"] body {
+    line-height: 1.8;
+  }
+  html[lang="zh-CN"] body {
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    line-height: 1.2;
+    text-wrap: balance;
+  }
+  html[lang="th"] :is(h1, h2, h3) {
+    line-height: 1.4;
+  }
+  html[lang="zh-CN"] :is(h1, h2, h3) {
+    line-height: 1.35;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

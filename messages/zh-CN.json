@@ -1,0 +1,54 @@
+{
+  "Metadata": {
+    "titleTemplate": "%s | {siteName}",
+    "defaultTitle": "生育健康服务",
+    "description": "生育咨询与护理服务。网站正在开发中——诊所信息尚待核实。"
+  },
+  "Common": {
+    "skipToContent": "跳至主要内容",
+    "languageLabel": "语言",
+    "languageNames": {
+      "th": "ไทย",
+      "en": "English",
+      "zh-CN": "简体中文"
+    },
+    "provisionalName": "开发阶段暂用名称",
+    "pendingVerification": "待核实",
+    "placeholderBadge": "占位内容",
+    "developmentBanner": "本网站正在开发中。此处显示的诊所信息为占位内容，尚未经过核实。"
+  },
+  "Home": {
+    "metaTitle": "首页",
+    "eyebrow": "生育健康服务",
+    "title": "以安心、清晰的方式开启您的求子之路",
+    "intro": "本页面为网站基础框架的开发预览。诊所服务、医生及联系方式将在诊所提供并核实后在此发布。",
+    "primaryCta": "联系诊所",
+    "primaryCtaPending": "联系表单将在后续阶段开放",
+    "secondaryCta": "查看设计基础"
+  },
+  "Styleguide": {
+    "metaTitle": "设计基础",
+    "title": "设计基础",
+    "intro": "暂定设计变量与基础组件的内部参考页面，不属于公开网站内容。",
+    "colors": "颜色",
+    "typography": "字体排版",
+    "buttons": "按钮",
+    "badges": "标签",
+    "cards": "卡片",
+    "notices": "提示信息",
+    "sampleHeading": "标题示例",
+    "sampleBody": "正文示例。充足的留白与清晰的层次结构，帮助访客从容地查找信息。",
+    "sampleCardTitle": "卡片标题",
+    "sampleCardBody": "卡片用于归类相关信息，例如服务项目或医生简介。",
+    "primary": "主要",
+    "secondary": "次要",
+    "ghost": "透明",
+    "disabled": "已停用"
+  },
+  "NotFound": {
+    "metaTitle": "页面未找到",
+    "title": "页面未找到",
+    "body": "您访问的页面不存在，或暂未提供该语言版本。",
+    "backHome": "返回首页"
+  }
+}
