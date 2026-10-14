@@ -10,6 +10,9 @@ import { NavDropdown } from "./NavDropdown";
 import { NavLink } from "./NavLink";
 import { SiteLogo } from "./SiteLogo";
 
+const navLinkClass =
+  "inline-flex min-h-11 items-center rounded-pill px-3.5 text-[0.95rem] font-medium text-foreground transition-colors hover:bg-primary-soft hover:text-primary aria-[current=page]:bg-primary-soft aria-[current=page]:text-primary";
+
 export async function Header({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "Nav" });
   const services = await listServices(locale);
@@ -18,9 +21,6 @@ export async function Header({ locale }: { locale: Locale }) {
     { href: "/services", label: t("allServices") },
     ...services.map((s) => ({ href: `/services/${s.slug}`, label: s.translations[locale]!.title })),
   ];
-
-  // "Contact" is presented as the call-to-action button rather than a nav link.
-  const navItems = mainNav.filter((item) => item.key !== "contact");
 
   const mobileItems: MobileNavItem[] = mainNav.map((item) => ({
     href: item.href,
@@ -39,20 +39,25 @@ export async function Header({ locale }: { locale: Locale }) {
         </div>
       </div>
 
-      <div className="relative mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-3 sm:px-8">
+      <div className="relative mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-2 sm:px-8">
         <SiteLogo />
 
         <nav aria-label={t("mainLabel")} className="hidden lg:block">
-          <ul className="flex items-center gap-1">
-            {navItems.map((item) => (
+          <ul className="flex items-center gap-0.5 xl:gap-1">
+            {mainNav.map((item) => (
               <li key={item.key}>
                 {item.key === "services" ? (
                   <NavDropdown label={t("services")} items={serviceItems} />
-                ) : (
+                ) : item.key === "contact" ? (
                   <NavLink
                     href={item.href}
-                    className="inline-flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-foreground hover:text-primary aria-[current=page]:underline aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-8"
+                    className="ml-2 inline-flex min-h-11 items-center rounded-pill bg-primary px-5 text-[0.95rem] font-medium text-on-primary transition-colors hover:bg-primary-hover aria-[current=page]:bg-primary-hover"
+                    activeClassName=""
                   >
+                    {t(item.key)}
+                  </NavLink>
+                ) : (
+                  <NavLink href={item.href} exact={item.href === "/"} className={navLinkClass} activeClassName="">
                     {t(item.key)}
                   </NavLink>
                 )}
@@ -61,28 +66,19 @@ export async function Header({ locale }: { locale: Locale }) {
           </ul>
         </nav>
 
-        <div className="flex items-center gap-2">
-          {/* Wrapper avoids a display-utility conflict with the button's own inline-flex. */}
-          <div className="hidden sm:block">
-            <ButtonLink href="/contact">{t("contactCta")}</ButtonLink>
-          </div>
-          <MobileNav
-            items={mobileItems}
-            openLabel={t("openMenu")}
-            closeLabel={t("closeMenu")}
-            footer={
-              <>
-                <ButtonLink href="/contact" size="lg">
-                  {t("contactCta")}
-                </ButtonLink>
-                <ButtonLink href={patientLoginHref} variant="secondary" size="lg">
-                  {t("patientLogin")}
-                </ButtonLink>
-                <LanguageSwitcher />
-              </>
-            }
-          />
-        </div>
+        <MobileNav
+          items={mobileItems}
+          openLabel={t("openMenu")}
+          closeLabel={t("closeMenu")}
+          footer={
+            <>
+              <ButtonLink href={patientLoginHref} variant="secondary" size="lg">
+                {t("patientLogin")}
+              </ButtonLink>
+              <LanguageSwitcher />
+            </>
+          }
+        />
       </div>
     </header>
   );

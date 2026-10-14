@@ -7,7 +7,7 @@ import { DevelopmentBanner } from "@/components/DevelopmentBanner";
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
 import { SkipLink } from "@/components/SkipLink";
-import { allowIndexing, displayValue, siteConfig } from "@/config/site";
+import { allowIndexing, clinicName, siteConfig } from "@/config/site";
 import { htmlLang, isLocale, locales, ogLocale } from "@/i18n/routing";
 import { fontVariables } from "../fonts";
 import "../globals.css";
@@ -17,14 +17,14 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#fdfbf7",
+  themeColor: "#fffdf6",
 };
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await rootLocale();
   if (!isLocale(locale)) return {};
   const t = await getTranslations({ locale, namespace: "Metadata" });
-  const siteName = displayValue(siteConfig.name) ?? "[Clinic Name]";
+  const siteName = clinicName(locale);
 
   return {
     metadataBase: new URL(siteConfig.url),

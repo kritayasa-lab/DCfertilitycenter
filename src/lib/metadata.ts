@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { displayValue, siteConfig } from "@/config/site";
+import { clinicName } from "@/config/site";
 import { htmlLang, locales, defaultLocale, ogLocale, type Locale } from "@/i18n/routing";
 
 /**
@@ -23,8 +23,8 @@ export function localeAlternates(
   return { canonical: `/${locale}${path}`, languages };
 }
 
-export function siteName(): string {
-  return displayValue(siteConfig.name) ?? "[Clinic Name]";
+export function siteName(locale: Locale): string {
+  return clinicName(locale);
 }
 
 /**
@@ -51,10 +51,10 @@ export function buildMetadata({
     description,
     alternates: localeAlternates(locale, path, availableLocales),
     openGraph: {
-      title: `${title} | ${siteName()}`,
+      title: `${title} | ${siteName(locale)}`,
       description,
       url: `/${locale}${path}`,
-      siteName: siteName(),
+      siteName: siteName(locale),
       locale: ogLocale[locale],
       alternateLocale: availableLocales.filter((l) => l !== locale).map((l) => ogLocale[l]),
       type: "website",

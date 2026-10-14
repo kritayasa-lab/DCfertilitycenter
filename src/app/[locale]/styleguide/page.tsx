@@ -104,10 +104,10 @@ export default async function StyleguidePage() {
               </Card>
               <Card>
                 <h3 className="text-xl">
-                  <PendingValue entry={siteConfig.contact.phone} label="Phone" />
+                  <PendingValue entry={siteConfig.contact.email} label="Email" />
                 </h3>
                 <p className="mt-2 text-sm text-muted">
-                  <PendingValue entry={siteConfig.contact.address} label="Address" />
+                  <PendingValue entry={siteConfig.contact.openingHours} label="Opening hours" />
                 </p>
               </Card>
             </div>

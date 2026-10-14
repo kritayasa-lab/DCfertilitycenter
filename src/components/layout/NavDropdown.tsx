@@ -57,7 +57,7 @@ export function NavDropdown({
         aria-expanded={open}
         aria-controls={menuId}
         onClick={() => setOpen((value) => !value)}
-        className="inline-flex min-h-11 items-center gap-1 rounded-md px-3 text-sm font-medium text-foreground hover:text-primary"
+        className="inline-flex min-h-11 items-center gap-1 rounded-pill px-3.5 text-[0.95rem] font-medium text-foreground transition-colors hover:bg-primary-soft hover:text-primary"
       >
         {label}
         <svg aria-hidden="true" viewBox="0 0 20 20" className={`h-4 w-4 ${open ? "rotate-180" : ""}`}>

@@ -1,16 +1,18 @@
 /**
- * Central clinic configuration.
+ * Central clinic configuration: the single source of clinic facts for the
+ * Header, Footer, Contact sections, metadata and the sitemap. Phase 4 moves
+ * these values into the CMS `site_settings` record (docs/ADMIN_CMS_REQUIREMENTS.md).
  *
- * Every clinic fact lives here (and, from Phase 4, in the CMS `site_settings`
- * record) so that Header, Footer, Contact and metadata never hardcode details.
- *
- * IMPORTANT: Nothing in this file has been verified by the clinic. A value is
- * only rendered as a fact when its `status` is "verified". Unverified values
- * render as clearly marked placeholders instead. Do not fill in a value
- * (address, phone, hours, etc.) unless the clinic has supplied it.
+ * Status meanings:
+ *  - "verified":    confirmed for publication by the clinic.
+ *  - "provided":    supplied by the clinic owner for this build; shown as fact,
+ *                   still awaiting final pre-launch sign-off.
+ *  - "provisional": approved for development only; shown with care.
+ *  - "pending":     not supplied. Rendered as a labelled placeholder, never invented.
  */
+import type { Locale } from "@/i18n/routing";
 
-export type VerificationStatus = "verified" | "provisional" | "pending";
+export type VerificationStatus = "verified" | "provided" | "provisional" | "pending";
 
 export interface ConfigValue<T> {
   value: T | null;
@@ -18,65 +20,71 @@ export interface ConfigValue<T> {
 }
 
 export interface SiteConfig {
-  /** Working name approved for development only. */
-  name: ConfigValue<string>;
-  /** Short name / monogram used for the text-based placeholder logo. */
-  shortName: ConfigValue<string>;
-  /** Public production URL. */
+  /** Clinic display name per locale (provisional branding). */
+  name: ConfigValue<Record<Locale, string>>;
   url: string;
   contact: {
-    phone: ConfigValue<string>;
+    /** Phone numbers as supplied, in display format. */
+    phones: ConfigValue<string[]>;
     email: ConfigValue<string>;
     lineId: ConfigValue<string>;
+    /** Address as supplied (Thai only; not machine-translated). */
     address: ConfigValue<string>;
     openingHours: ConfigValue<string>;
+    /** Google Maps link supplied by the clinic (opened directly, never parsed). */
     mapUrl: ConfigValue<string>;
   };
   social: {
-    facebook: ConfigValue<string>;
-    line: ConfigValue<string>;
     instagram: ConfigValue<string>;
+    tiktok: ConfigValue<string>;
+    facebook: ConfigValue<string>;
   };
 }
 
 const pending = <T>(): ConfigValue<T> => ({ value: null, status: "pending" });
 
 export const siteConfig: SiteConfig = {
-  name: { value: "DC Fertility Center Hatyai", status: "provisional" },
-  shortName: { value: "DC", status: "provisional" },
+  name: {
+    value: { th: "คลินิกหมอชัยณรงค์", en: "DC Fertility Center", "zh-CN": "DC Fertility Center" },
+    status: "provisional",
+  },
   url:
     process.env.NEXT_PUBLIC_SITE_URL ??
     (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
   contact: {
-    phone: pending(),
+    phones: { value: ["097-3470648", "074-225-223"], status: "provided" },
     email: pending(),
     lineId: pending(),
-    address: pending(),
+    address: { value: "97/12 ถนนราษฎร์ยินดี อำเภอหาดใหญ่ จังหวัดสงขลา 90110", status: "provided" },
     openingHours: pending(),
-    mapUrl: pending(),
+    mapUrl: { value: "https://maps.app.goo.gl/63SiK2gmrM4EtzH49", status: "provided" },
   },
   social: {
-    facebook: pending(),
-    line: pending(),
     instagram: pending(),
+    tiktok: pending(),
+    facebook: pending(),
   },
 };
 
-/**
- * Returns the value only when the clinic has verified it. Use this for any
- * value presented to visitors as a fact (contact links, structured data).
- */
+/** Value if it may be presented as a fact (verified or supplied by the clinic). */
 export function verifiedValue<T>(entry: ConfigValue<T>): T | null {
-  return entry.status === "verified" ? entry.value : null;
+  return entry.status === "verified" || entry.status === "provided" ? entry.value : null;
 }
 
-/**
- * Returns the value when it is verified or explicitly approved as provisional
- * (e.g. the working clinic name). Callers must display provisional values
- * with a visible indication where they could be mistaken for verified facts.
- */
+/** Value if it may be displayed at all (anything but pending). */
 export function displayValue<T>(entry: ConfigValue<T>): T | null {
   return entry.status === "pending" ? null : entry.value;
+}
+
+/** The clinic's display name in `locale`. */
+export function clinicName(locale: Locale): string {
+  return displayValue(siteConfig.name)?.[locale] ?? "[Clinic Name]";
+}
+
+/** `tel:` href for a displayed phone number (digits only, Thai country code). */
+export function telHref(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  return `tel:+66${digits.replace(/^0/, "")}`;
 }
 
 /** Whether search engines may index the site. Off until launch is approved. */
