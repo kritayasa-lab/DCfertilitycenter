@@ -1,10 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { buttonClasses, ButtonLink } from "@/components/ui/Button";
-import { mainNav, patientLoginHref } from "@/config/navigation";
+import { buttonClasses } from "@/components/ui/Button";
+import { mainNav } from "@/config/navigation";
 import { listServices } from "@/content/queries";
 import type { Locale } from "@/i18n/routing";
-import { Link } from "@/i18n/navigation";
 import { MobileNav, type MobileNavItem } from "./MobileNav";
 import { NavDropdown } from "./NavDropdown";
 import { NavLink } from "./NavLink";
@@ -30,19 +29,10 @@ export async function Header({ locale }: { locale: Locale }) {
 
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/85">
-      <div className="hidden border-b border-border/70 lg:block">
-        <div className="mx-auto flex max-w-content items-center justify-end gap-5 px-8 py-1.5 text-sm">
-          <Link href={patientLoginHref} className="text-muted underline-offset-4 hover:text-primary hover:underline">
-            {t("patientLogin")}
-          </Link>
-          <LanguageSwitcher compact />
-        </div>
-      </div>
-
-      <div className="relative mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-2 sm:px-8">
+      <div className="relative mx-auto flex max-w-content items-center justify-between gap-4 px-5 py-3 sm:px-8">
         <SiteLogo />
 
-        <nav aria-label={t("mainLabel")} className="hidden lg:block">
+        <nav aria-label={t("mainLabel")} className="hidden xl:block">
           <ul className="flex items-center gap-0.5 xl:gap-1">
             {mainNav.map((item) => (
               <li key={item.key}>
@@ -66,18 +56,15 @@ export async function Header({ locale }: { locale: Locale }) {
           </ul>
         </nav>
 
+        <div className="hidden xl:block">
+          <LanguageSwitcher compact />
+        </div>
+
         <MobileNav
           items={mobileItems}
           openLabel={t("openMenu")}
           closeLabel={t("closeMenu")}
-          footer={
-            <>
-              <ButtonLink href={patientLoginHref} variant="secondary" size="lg">
-                {t("patientLogin")}
-              </ButtonLink>
-              <LanguageSwitcher />
-            </>
-          }
+          footer={<LanguageSwitcher />}
         />
       </div>
     </header>

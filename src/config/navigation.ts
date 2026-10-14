@@ -1,7 +1,7 @@
 /**
  * Public navigation. Labels are keys in the `Nav` / `Legal` message namespaces.
- * The six primary items are fixed by the approved redesign brief. Patient login
- * lives in the utility bar; admin access is never linked from public pages.
+ * The six primary items are fixed by the approved redesign brief. There is no
+ * patient login (removed from scope); admin access is never linked from public pages.
  */
 export const mainNav = [
   { key: "home", href: "/" },
@@ -35,6 +35,3 @@ export const staticPublicPaths = [
   ...footerNav.map((item) => item.href),
   ...legalNav.map((item) => item.href),
 ] as const;
-
-/** Patient portal entry point. Staff access is separate (/<locale>/admin). */
-export const patientLoginHref = "/portal/login";

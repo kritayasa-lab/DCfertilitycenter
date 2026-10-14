@@ -6,7 +6,7 @@
 > [`docs/CONTENT_STATUS.md`](docs/CONTENT_STATUS.md).
 
 Multilingual (Thai / English / Simplified Chinese) fertility clinic website, with a protected
-admin CMS and a limited patient portal planned for later phases. The project is built in gated
+admin CMS planned for a later phase (the patient portal has been removed from scope). The project is built in gated
 phases; see [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md).
 
 ## Stack

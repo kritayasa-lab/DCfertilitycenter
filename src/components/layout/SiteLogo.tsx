@@ -11,8 +11,8 @@ export function SiteLogo({ className }: { className?: string }) {
   const locale = useLocale() as Locale;
   const name = clinicName(locale);
   return (
-    <Link href="/" className={cn("inline-block shrink-0 rounded-md py-1", className)} aria-label={`${name} – ${t("home")}`}>
-      <LogoImage alt={t("logoAlt", { name })} maxWidth={200} preload className="w-[168px] sm:w-[200px]" />
+    <Link href="/" className={cn("inline-block shrink-0 rounded-md", className)} aria-label={`${name} – ${t("home")}`}>
+      <LogoImage alt={t("logoAlt", { name })} maxWidth={172} preload className="w-[136px] sm:w-[152px] lg:w-[172px]" />
     </Link>
   );
 }

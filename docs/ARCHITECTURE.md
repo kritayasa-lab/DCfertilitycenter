@@ -11,7 +11,7 @@ Status: **Phase 2 (public website)**. Later sections describe the approved plan 
 | 2 | Public website pages, Header/Footer, SEO | **This phase** |
 | 3 | Supabase Auth/Postgres, roles, RLS, DB policy tests | Planned (needs approved Supabase project) |
 | 4 | Admin dashboard and CMS | Planned |
-| 5 | Patient portal (account, profile, own inquiries only) | Planned |
+| 5 | ~~Patient portal~~ | Removed from project scope (owner decision) |
 | 6 | Inquiry workflow, anti-spam, optional notifications | Planned |
 | 7 | QA, security review, documentation | Planned |
 | 8 | GitHub PR + Vercel Preview | Planned (needs Vercel project) |
@@ -64,14 +64,13 @@ All routes are prefixed with `/<locale>` (`th`, `en`, `zh-CN`).
 | Area | Routes | Access |
 |---|---|---|
 | Public | `/`, `/about`, `/success-rates` (draft, noindex), `/services`, `/services/[slug]`, `/doctors`, `/doctors/[slug]`, `/facilities`, `/packages`, `/packages/[slug]`, `/articles` (`?category=`, `?q=`), `/articles/[slug]`, `/faq`, `/contact`, `/privacy`, `/terms`, `/medical-disclaimer`, `/cookies` | Anyone |
-| Patient portal | `/portal/login` (placeholder only in Phase 2); `/portal/*` from Phase 5 | Patients (Phase 3/5) |
 | Admin | `/admin/*` (approved convention, from Phase 3/4) | Staff/admin only |
 | Internal | `/styleguide` | `noindex`; remove or protect before production |
 
 The `/[locale]/admin` decision changes only the URL shape. Authorization never depends on the URL
-prefix: every admin and portal route and Server Action will check the session and role on the server
-(and RLS in the database). Portal and admin get separate layouts, separate login pages, and no
-shared dashboard. The public header links only to the patient login; staff use `/<locale>/admin/login`.
+prefix: every admin route and Server Action will check the session and role on the server
+(and RLS in the database). Admin gets its own layout and login page. The public site has no login
+links; staff use `/<locale>/admin/login` (future phase).
 
 ## Homepage (redesign)
 
@@ -116,7 +115,7 @@ Client JavaScript is limited to: language switcher, nav dropdown, mobile menu, a
 
 Per-page localized title/description, canonical, hreflang alternates (+ `x-default` → `th`), Open
 Graph (`og:locale` + alternates), `sitemap.xml` (all locales, alternates, excludes expired, untranslated,
-internal and portal pages), `robots.txt`. Structured data (e.g. `MedicalClinic`) is **intentionally
+internal pages), `robots.txt`. Structured data (e.g. `MedicalClinic`) is **intentionally
 omitted** until the clinic's name, address and contact details are verified.
 
 ## Clinic facts
