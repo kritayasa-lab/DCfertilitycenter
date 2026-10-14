@@ -12,7 +12,7 @@ export function CtaBand() {
           <h2 id="cta-heading" className="text-3xl">{t("ctaHeading")}</h2>
           <p className="mt-3 text-muted">{t("ctaBody")}</p>
         </div>
-        <ButtonLink href="/contact" size="lg" className="shrink-0">
+        <ButtonLink href="/contact" variant="gold" size="lg" className="shrink-0">
           {t("primaryCta")}
         </ButtonLink>
       </Container>

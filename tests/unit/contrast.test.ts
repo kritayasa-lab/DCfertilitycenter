@@ -53,6 +53,10 @@ describe("text colour pairs meet WCAG AA (4.5:1)", () => {
     ["danger", "danger-soft"],
     ["danger", "surface"],
     ["success", "success-soft"],
+    // Champagne-gold CTA: text against every gradient stop.
+    ["on-cta-gold", "gold-100"],
+    ["on-cta-gold", "cta-gold"],
+    ["on-cta-gold", "cta-gold-deep"],
   ])("%s on %s", (fg, bg) => expect(ratio(fg, bg)).toBeGreaterThanOrEqual(4.5));
 });
 
@@ -62,5 +66,6 @@ describe("large text and non-text UI meet 3:1", () => {
     ["accent-vivid", "surface-muted"],
     ["focus", "background"],
     ["focus", "surface-muted"],
+    ["forest-900", "background"], // gold CTA focus ring
   ])("%s on %s", (fg, bg) => expect(ratio(fg, bg)).toBeGreaterThanOrEqual(3));
 });

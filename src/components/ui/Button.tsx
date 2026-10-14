@@ -2,19 +2,23 @@ import type { ComponentProps } from "react";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 
-export type ButtonVariant = "primary" | "secondary" | "ghost";
+/** "gold" is reserved for primary contact/appointment CTAs. */
+export type ButtonVariant = "primary" | "gold" | "secondary" | "ghost";
 export type ButtonSize = "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-pill font-medium transition-colors " +
-  "focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-focus " +
+  "inline-flex items-center justify-center gap-2 rounded-pill font-medium " +
   "disabled:cursor-not-allowed disabled:opacity-50 aria-disabled:cursor-not-allowed aria-disabled:opacity-50";
 
+// Standard transitions and focus ring; the gold CTA defines its own in globals.css.
+const standardFx =
+  "transition-colors focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-focus";
+
 const variants: Record<ButtonVariant, string> = {
-  primary: "bg-primary text-on-primary shadow-soft hover:bg-primary-hover",
-  secondary:
-    "border border-primary bg-surface text-primary hover:bg-primary-soft",
-  ghost: "text-primary hover:bg-primary-soft",
+  primary: `${standardFx} bg-primary text-on-primary shadow-soft hover:bg-primary-hover`,
+  gold: "btn-gold font-semibold",
+  secondary: `${standardFx} border border-primary bg-surface text-primary hover:bg-primary-soft`,
+  ghost: `${standardFx} text-primary hover:bg-primary-soft`,
 };
 
 const sizes: Record<ButtonSize, string> = {

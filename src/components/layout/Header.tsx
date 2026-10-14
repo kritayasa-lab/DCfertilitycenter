@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
-import { ButtonLink } from "@/components/ui/Button";
+import { buttonClasses, ButtonLink } from "@/components/ui/Button";
 import { mainNav, patientLoginHref } from "@/config/navigation";
 import { listServices } from "@/content/queries";
 import type { Locale } from "@/i18n/routing";
@@ -51,7 +51,7 @@ export async function Header({ locale }: { locale: Locale }) {
                 ) : item.key === "contact" ? (
                   <NavLink
                     href={item.href}
-                    className="ml-2 inline-flex min-h-11 items-center rounded-pill bg-primary px-5 text-[0.95rem] font-medium text-on-primary transition-colors hover:bg-primary-hover aria-[current=page]:bg-primary-hover"
+                    className={buttonClasses("gold", "md", "ml-2 px-6 text-[0.95rem]")}
                     activeClassName=""
                   >
                     {t(item.key)}
