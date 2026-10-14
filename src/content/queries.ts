@@ -4,6 +4,7 @@ import { articles } from "./fixtures/articles";
 import { doctors } from "./fixtures/doctors";
 import { facilities } from "./fixtures/facilities";
 import { faqs } from "./fixtures/faqs";
+import { promoSlides, successStories } from "./fixtures/home";
 import { packages } from "./fixtures/packages";
 import { services } from "./fixtures/services";
 import { clinicToday, isPackageActive, publishedIn } from "./localize";
@@ -81,4 +82,12 @@ export function articleSlugs() {
 
 export async function listFaqs(locale: Locale) {
   return publishedIn(faqs, locale);
+}
+
+/** Homepage carousel slots (placeholders until the CMS supplies approved items). */
+export async function listPromoSlides() {
+  return promoSlides;
+}
+export async function listSuccessStories() {
+  return successStories;
 }

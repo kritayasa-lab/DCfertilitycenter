@@ -23,7 +23,8 @@
     "viewDetails": "查看详情",
     "viewAll": "查看全部",
     "breadcrumbLabel": "导航路径",
-    "home": "首页"
+    "home": "首页",
+    "logoAlt": "{name} 标志"
   },
   "Nav": {
     "mainLabel": "主导航",
@@ -40,7 +41,9 @@
     "patientLogin": "患者登录",
     "openMenu": "打开菜单",
     "closeMenu": "关闭菜单",
-    "more": "更多"
+    "more": "更多",
+    "home": "首页",
+    "packagesPromotions": "套餐与优惠"
   },
   "Footer": {
     "tagline": "生育咨询与护理服务。",
@@ -55,7 +58,10 @@
     "address": "地址",
     "hours": "营业时间",
     "copyright": "© {year} {siteName} 版权所有。",
-    "medicalNote": "本网站信息仅供一般参考，不能替代个人医疗建议。"
+    "medicalNote": "本网站信息仅供一般参考，不能替代个人医疗建议。",
+    "openMap": "在 Google 地图中打开",
+    "socialHeading": "社交媒体",
+    "socialPending": "官方链接待提供"
   },
   "Legal": {
     "privacy": "隐私声明",
@@ -110,41 +116,54 @@
   },
   "Home": {
     "metaTitle": "首页",
-    "eyebrow": "生育健康服务",
-    "title": "以安心、清晰的方式开启您的求子之路",
-    "intro": "清晰的信息，加上与诊所团队的个人沟通，按照您自己的节奏进行。",
-    "primaryCta": "联系诊所",
-    "secondaryCta": "了解服务项目",
-    "aboutHeading": "我们的护理理念",
-    "aboutBody": "[诊所简介与护理理念——待诊所审批内容。]",
-    "aboutLink": "关于诊所",
-    "servicesHeading": "生育服务",
-    "servicesIntro": "服务项目经诊所确认后将在此列出。",
-    "whyHeading": "为什么选择本诊所",
-    "whyBody": "此处仅发布可核实的优势信息，目前正待诊所提供。",
-    "journeyHeading": "联系流程",
-    "journeyIntro": "联系诊所从提交咨询开始，而非即时预约。",
-    "journeySteps": {
-      "inquiry": {
-        "title": "提交咨询",
-        "body": "留下您的联系方式及希望被联系的方式。"
-      },
-      "contact": {
-        "title": "诊所团队与您联系",
-        "body": "团队成员会查看您的咨询并与您联系。"
-      },
-      "arrange": {
-        "title": "安排咨询",
-        "body": "双方共同确定合适的咨询时间。"
-      }
+    "heroIntro": "与诊所医生进行生育咨询。",
+    "heroPrimaryCta": "联系我们",
+    "heroSecondaryCta": "服务项目",
+    "heroImageAlt": "诊所两位身穿白大褂的医生",
+    "doctorsLabel": "医生团队",
+    "visionLabel": "诊所愿景",
+    "vision": {
+      "hope": "希望",
+      "trust": "信任",
+      "miracle": "奇迹"
     },
-    "doctorsHeading": "医生与专家",
-    "facilitiesHeading": "诊所设施",
+    "servicesEyebrow": "Our services",
+    "servicesHeading": "服务项目",
+    "servicesViewAll": "全部服务",
+    "serviceCta": "查看详情",
+    "packagesEyebrow": "Packages & promotions",
     "packagesHeading": "套餐与优惠",
-    "articlesHeading": "文章",
-    "faqHeading": "常见问题",
+    "packagesIntro": "诊所确认详情后，套餐与优惠将在此展示。目前尚无已发布的优惠。",
+    "packagesViewAll": "查看全部套餐",
+    "packagePlaceholderTitle": "套餐位 {n}",
+    "packagePlaceholderBody": "尚无已发布的套餐——待诊所提供图片与详情。",
+    "storiesEyebrow": "Success stories",
+    "storiesHeading": "成功故事",
+    "storiesIntro": "视频仅在获得相关人员同意并经诊所审核后发布。",
+    "storyPlaceholderTitle": "视频 {n}",
+    "storyPlaceholderBody": "尚无已发布的视频。",
+    "storyNoVideo": "暂无视频",
+    "storyPlay": "播放视频",
+    "whyHeading": "为什么选择 DC Fertility Center",
+    "whyImageAlt": "诊所两位医生站在诊所走廊中",
+    "whyDescriptionPending": "诊所介绍——待审批内容",
+    "successRatesButton": "成功率",
+    "facilitiesButton": "诊所设施",
+    "qaEyebrow": "Articles",
+    "qaHeading": "Q&A",
+    "qaIntro": "文章仅提供一般信息，并非个人医疗建议。",
+    "allArticles": "全部文章",
+    "readArticle": "阅读文章",
+    "contactEyebrow": "Contact",
+    "contactHeading": "咨询联系",
+    "contactIntro": "留下您的联系方式，诊所团队将与您联系。提交信息并不代表预约已确认。",
+    "mapTitle": "诊所位置地图",
+    "mapLoad": "显示地图",
+    "mapNotice": "显示地图时，您的浏览器将连接 Google 地图。",
+    "mapOpen": "在 Google 地图中打开",
     "ctaHeading": "有疑问吗？",
-    "ctaBody": "欢迎联系诊所团队。提交咨询并不代表预约已确认。"
+    "ctaBody": "欢迎联系诊所团队。提交咨询并不代表预约已确认。",
+    "primaryCta": "联系诊所"
   },
   "About": {
     "metaTitle": "关于诊所",
@@ -247,7 +266,7 @@
     "mapHeading": "位置与交通",
     "mapPending": "诊所地址核实后将显示地图。",
     "formHeading": "咨询表单",
-    "formNotConnected": "咨询表单尚未开通。提交功能已停用，您在此输入的任何内容都不会被发送或保存。",
+    "formNotConnected": "此表单尚未接通。您填写的任何信息都不会被发送或保存。",
     "formNotBooking": "提交咨询并不代表预约已确认。诊所团队会与您联系安排预约。",
     "fields": {
       "name": "姓名",
@@ -273,8 +292,24 @@
       "privacy": "我已阅读<privacyLink>隐私声明</privacyLink>，并同意诊所就我的咨询与我联系。",
       "dataMinimization": "请勿在此填写医疗信息，相关细节可与诊所私下沟通。"
     },
-    "submit": "提交咨询",
-    "submitDisabled": "暂不可提交"
+    "submit": "发送信息",
+    "sending": "发送中…",
+    "errorSummary": "请检查 {count} 项信息。",
+    "errors": {
+      "required": "请填写此项。",
+      "tooLong": "内容过长。",
+      "phone": "请输入有效的电话号码（9–15 位数字）。",
+      "email": "请输入有效的电子邮箱。",
+      "emailRequiredForMethod": "如希望通过电子邮件联系，请填写电子邮箱。",
+      "consent": "请确认您已阅读隐私声明。",
+      "spam": "无法提交此信息。"
+    },
+    "results": {
+      "notConnected": "您的信息尚未发送——此表单尚未接通。请致电 {phones}。",
+      "delivered": "诊所已收到您的信息，团队将与您联系（这并非预约确认）。",
+      "failed": "发送失败。请重试或致电 {phones}。"
+    },
+    "honeypot": "网站（请留空）"
   },
   "Portal": {
     "loginMetaTitle": "患者登录",
@@ -312,5 +347,20 @@
     "title": "页面未找到",
     "body": "您访问的页面不存在，或暂未提供该语言版本。",
     "backHome": "返回首页"
+  },
+  "Carousel": {
+    "previous": "上一页",
+    "next": "下一页",
+    "goTo": "前往第 {page} 页",
+    "slide": "第 {index} 项，共 {total} 项",
+    "roleCarousel": "轮播",
+    "roleSlide": "幻灯片"
+  },
+  "SuccessRates": {
+    "metaTitle": "成功率",
+    "title": "成功率",
+    "notPublished": "尚未发布任何成功率数据。",
+    "body": "只有在诊所提供经核实的数据、计算方法并通过医学审核后，才会发布相关数字。治疗结果因人而异。",
+    "contactCta": "联系诊所"
   }
 }

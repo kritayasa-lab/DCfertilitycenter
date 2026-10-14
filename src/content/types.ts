@@ -45,7 +45,11 @@ export interface ServiceContent {
   preparation: Pending<string>;
   faqs: FaqItem[];
 }
-export type Service = BaseRecord<ServiceContent>;
+export const serviceIcons = ["consultation", "iui", "ivf", "sperm-retrieval", "pgt", "obgyn"] as const;
+export type ServiceIcon = (typeof serviceIcons)[number];
+export interface Service extends BaseRecord<ServiceContent> {
+  icon: ServiceIcon;
+}
 
 export interface DoctorContent {
   name: string;
@@ -98,3 +102,25 @@ export const articleCategories = ["fertility-basics", "treatment-journey", "clin
 export type ArticleCategory = (typeof articleCategories)[number];
 
 export type Faq = BaseRecord<FaqItem> & { topic: "general" | "contact" | "services" };
+
+/** Homepage package/promotion carousel slot (CMS-managed from Phase 4). */
+export interface PromoSlide {
+  id: string;
+  placeholder: boolean;
+  /** Approved image; null until supplied. */
+  image: Pending<{ src: string; width: number; height: number; alt: Localized<string> }>;
+  /** Link to a published package page; null until one exists. */
+  packageSlug: Pending<string>;
+}
+
+export const videoProviders = ["youtube", "vimeo"] as const;
+export type VideoProvider = (typeof videoProviders)[number];
+
+/** Homepage success-story slot. Videos require documented consent and review. */
+export interface SuccessStory {
+  id: string;
+  placeholder: boolean;
+  /** Parsed, allow-listed video reference; null until an approved link exists. */
+  video: Pending<{ provider: VideoProvider; id: string }>;
+  title: Localized<string>;
+}

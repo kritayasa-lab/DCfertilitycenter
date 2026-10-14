@@ -23,11 +23,12 @@
     "viewDetails": "View details",
     "viewAll": "View all",
     "breadcrumbLabel": "Breadcrumb",
-    "home": "Home"
+    "home": "Home",
+    "logoAlt": "{name} logo"
   },
   "Nav": {
     "mainLabel": "Main",
-    "about": "About",
+    "about": "About Us",
     "services": "Services",
     "allServices": "All services",
     "doctors": "Doctors",
@@ -35,12 +36,14 @@
     "packages": "Packages",
     "articles": "Articles",
     "faq": "FAQ",
-    "contact": "Contact",
+    "contact": "Contact Us",
     "contactCta": "Contact us",
     "patientLogin": "Patient login",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
-    "more": "More"
+    "more": "More",
+    "home": "Home",
+    "packagesPromotions": "Packages & Promotions"
   },
   "Footer": {
     "tagline": "Fertility consultation and care.",
@@ -55,7 +58,10 @@
     "address": "Address",
     "hours": "Opening hours",
     "copyright": "© {year} {siteName}. All rights reserved.",
-    "medicalNote": "Information on this website is general in nature and is not a substitute for individual medical advice."
+    "medicalNote": "Information on this website is general in nature and is not a substitute for individual medical advice.",
+    "openMap": "Open in Google Maps",
+    "socialHeading": "Social media",
+    "socialPending": "official link pending"
   },
   "Legal": {
     "privacy": "Privacy notice",
@@ -110,41 +116,54 @@
   },
   "Home": {
     "metaTitle": "Home",
-    "eyebrow": "Fertility care",
-    "title": "A calm, informed start to your fertility journey",
-    "intro": "Clear information and a personal conversation with the clinic team, at your own pace.",
-    "primaryCta": "Contact the clinic",
-    "secondaryCta": "Explore services",
-    "aboutHeading": "Our approach to care",
-    "aboutBody": "[Clinic introduction and care philosophy — pending approved copy from the clinic.]",
-    "aboutLink": "About the clinic",
-    "servicesHeading": "Fertility services",
-    "servicesIntro": "Services will be listed here once confirmed by the clinic.",
-    "whyHeading": "Why choose the clinic",
-    "whyBody": "Only verifiable differentiators will be published here. Pending information from the clinic.",
-    "journeyHeading": "How getting in touch works",
-    "journeyIntro": "Contacting the clinic starts with an inquiry, not an instant booking.",
-    "journeySteps": {
-      "inquiry": {
-        "title": "Send an inquiry",
-        "body": "Share your contact details and how you would like to be contacted."
-      },
-      "contact": {
-        "title": "The clinic team contacts you",
-        "body": "A member of the team reviews your inquiry and gets in touch."
-      },
-      "arrange": {
-        "title": "Arrange a consultation",
-        "body": "Together you agree on a suitable time for a consultation."
-      }
+    "heroIntro": "Fertility consultation with the clinic's doctors.",
+    "heroPrimaryCta": "Contact us",
+    "heroSecondaryCta": "Our services",
+    "heroImageAlt": "The clinic's two doctors in white coats",
+    "doctorsLabel": "Our doctors",
+    "visionLabel": "Our vision",
+    "vision": {
+      "hope": "Hope",
+      "trust": "Trust",
+      "miracle": "Miracle"
     },
-    "doctorsHeading": "Doctors and specialists",
-    "facilitiesHeading": "Facilities",
-    "packagesHeading": "Packages and promotions",
-    "articlesHeading": "Articles",
-    "faqHeading": "Frequently asked questions",
+    "servicesEyebrow": "Our services",
+    "servicesHeading": "Our services",
+    "servicesViewAll": "All services",
+    "serviceCta": "View details",
+    "packagesEyebrow": "Packages & promotions",
+    "packagesHeading": "Packages & promotions",
+    "packagesIntro": "Packages and promotions will appear here once the clinic has confirmed them. No offers are published yet.",
+    "packagesViewAll": "View all packages",
+    "packagePlaceholderTitle": "Package slot {n}",
+    "packagePlaceholderBody": "No package published yet — awaiting images and details from the clinic.",
+    "storiesEyebrow": "Success stories",
+    "storiesHeading": "Success stories",
+    "storiesIntro": "Videos will only be published with the consent of the people involved and after review by the clinic.",
+    "storyPlaceholderTitle": "Video {n}",
+    "storyPlaceholderBody": "No video published yet.",
+    "storyNoVideo": "No video yet",
+    "storyPlay": "Play video",
+    "whyHeading": "Why DC Fertility Center",
+    "whyImageAlt": "The clinic's two doctors standing in the clinic corridor",
+    "whyDescriptionPending": "Clinic description — approved content pending",
+    "successRatesButton": "Success rates",
+    "facilitiesButton": "Facilities",
+    "qaEyebrow": "Articles",
+    "qaHeading": "Q&A",
+    "qaIntro": "Articles provide general information, not individual medical advice.",
+    "allArticles": "All articles",
+    "readArticle": "Read article",
+    "contactEyebrow": "Contact",
+    "contactHeading": "Get in touch",
+    "contactIntro": "Leave your contact details and the clinic team will call you back. Sending a message does not confirm an appointment.",
+    "mapTitle": "Map of the clinic location",
+    "mapLoad": "Show map",
+    "mapNotice": "Showing the map connects your browser to Google Maps.",
+    "mapOpen": "Open in Google Maps",
     "ctaHeading": "Have a question?",
-    "ctaBody": "Contact the clinic team. Submitting an inquiry does not confirm an appointment."
+    "ctaBody": "Contact the clinic team. Submitting an inquiry does not confirm an appointment.",
+    "primaryCta": "Contact the clinic"
   },
   "About": {
     "metaTitle": "About the clinic",
@@ -247,7 +266,7 @@
     "mapHeading": "Location and directions",
     "mapPending": "A map will be shown once the clinic's address has been verified.",
     "formHeading": "Inquiry form",
-    "formNotConnected": "The inquiry form is not connected yet. Submissions are disabled and nothing you type here is sent or stored.",
+    "formNotConnected": "This form is not connected yet. Nothing you enter is sent or stored.",
     "formNotBooking": "Submitting an inquiry will not confirm an appointment. The clinic team will contact you to arrange one.",
     "fields": {
       "name": "Full name",
@@ -273,8 +292,24 @@
       "privacy": "I have read the <privacyLink>privacy notice</privacyLink> and agree that the clinic may contact me about my inquiry.",
       "dataMinimization": "Please do not include medical details. These can be discussed privately with the clinic."
     },
-    "submit": "Send inquiry",
-    "submitDisabled": "Sending is not available yet"
+    "submit": "Send message",
+    "sending": "Sending…",
+    "errorSummary": "Please check {count} field(s).",
+    "errors": {
+      "required": "Please fill in this field.",
+      "tooLong": "This is too long.",
+      "phone": "Please enter a valid phone number (9–15 digits).",
+      "email": "Please enter a valid email address.",
+      "emailRequiredForMethod": "Please enter an email address if you would like to be contacted by email.",
+      "consent": "Please confirm that you have read the privacy notice.",
+      "spam": "This submission could not be sent."
+    },
+    "results": {
+      "notConnected": "Your details have NOT been sent — this form is not connected yet. Please call {phones}.",
+      "delivered": "The clinic has received your message and will contact you (this is not an appointment confirmation).",
+      "failed": "Sending failed. Please try again or call {phones}."
+    },
+    "honeypot": "Website (leave empty)"
   },
   "Portal": {
     "loginMetaTitle": "Patient login",
@@ -312,5 +347,20 @@
     "title": "Page not found",
     "body": "The page you are looking for does not exist or is not available in this language.",
     "backHome": "Back to home"
+  },
+  "Carousel": {
+    "previous": "Previous",
+    "next": "Next",
+    "goTo": "Go to page {page}",
+    "slide": "{index} of {total}",
+    "roleCarousel": "carousel",
+    "roleSlide": "slide"
+  },
+  "SuccessRates": {
+    "metaTitle": "Success rates",
+    "title": "Success rates",
+    "notPublished": "No success-rate data has been published.",
+    "body": "Figures will only be published once the clinic supplies verified data with its methodology and medical review. Treatment outcomes vary between individuals.",
+    "contactCta": "Contact the clinic"
   }
 }

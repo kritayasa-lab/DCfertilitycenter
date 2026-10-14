@@ -1,44 +1,63 @@
-import type { Service } from "../types";
+import type { Service, ServiceContent, ServiceIcon, TranslationMeta } from "../types";
 
-// PLACEHOLDERS ONLY. No service listed here is confirmed as offered by the
-// clinic. Replace with clinic-confirmed services and approved copy.
-const placeholderService = (n: number): Service => ({
-  slug: `example-service-${n}`,
+// Service names supplied by the clinic (Thai). English and Chinese titles are
+// development translations (status "draft") that need medical/native review.
+// All descriptive copy is pending approved text from the clinic.
+type Titles = { th: string; en: string; "zh-CN": string };
+
+const pendingContent = (title: string): ServiceContent & TranslationMeta => ({
+  status: "draft",
+  title,
+  summary: null,
+  introduction: null,
+  suitability: null,
+  processSteps: null,
+  preparation: null,
+  faqs: [],
+});
+
+const service = (slug: string, sortOrder: number, icon: ServiceIcon, titles: Titles): Service => ({
+  slug,
   published: true,
-  placeholder: true,
-  sortOrder: n,
+  placeholder: false,
+  sortOrder,
+  icon,
   translations: {
-    th: {
-      status: "draft",
-      title: `[บริการที่ ${n} – รอการยืนยันจากคลินิก]`,
-      summary: null,
-      introduction: null,
-      suitability: null,
-      processSteps: null,
-      preparation: null,
-      faqs: [],
-    },
-    en: {
-      status: "draft",
-      title: `[Service ${n} – pending clinic confirmation]`,
-      summary: null,
-      introduction: null,
-      suitability: null,
-      processSteps: null,
-      preparation: null,
-      faqs: [],
-    },
-    "zh-CN": {
-      status: "draft",
-      title: `[服务项目 ${n}——待诊所确认]`,
-      summary: null,
-      introduction: null,
-      suitability: null,
-      processSteps: null,
-      preparation: null,
-      faqs: [],
-    },
+    th: pendingContent(titles.th),
+    en: pendingContent(titles.en),
+    "zh-CN": pendingContent(titles["zh-CN"]),
   },
 });
 
-export const services: Service[] = [1, 2, 3, 4].map(placeholderService);
+export const services: Service[] = [
+  service("fertility-consultation", 1, "consultation", {
+    th: "ให้คำปรึกษา หาสาเหตุภาวะมีบุตรยาก",
+    en: "Fertility consultation and assessment",
+    "zh-CN": "不孕不育咨询与病因检查",
+  }),
+  service("iui", 2, "iui", {
+    th: "การฉีดน้ำเชื้ออสุจิเข้าสู่โพรงมดลูก (IUI)",
+    en: "Intrauterine insemination (IUI)",
+    "zh-CN": "宫腔内人工授精（IUI）",
+  }),
+  service("ivf", 3, "ivf", {
+    th: "การทำเด็กหลอดแก้ว (IVF)",
+    en: "In vitro fertilisation (IVF)",
+    "zh-CN": "体外受精（IVF，试管婴儿）",
+  }),
+  service("pesa-tese", 4, "sperm-retrieval", {
+    th: "การเก็บอสุจิโดยตรงจากอัณฑะ (PESA/TESE)",
+    en: "Surgical sperm retrieval (PESA/TESE)",
+    "zh-CN": "睾丸/附睾取精术（PESA/TESE）",
+  }),
+  service("pgt", 5, "pgt", {
+    th: "การตรวจคัดเลือกพันธุกรรมก่อนการฝังตัว (PGT)",
+    en: "Preimplantation genetic testing (PGT)",
+    "zh-CN": "胚胎植入前遗传学检测（PGT）",
+  }),
+  service("obstetrics-gynaecology", 6, "obgyn", {
+    th: "บริการด้านอื่น ๆ ทางสูติศาสตร์และนรีเวช",
+    en: "Other obstetric and gynaecological services",
+    "zh-CN": "其他妇产科服务",
+  }),
+];

@@ -1,39 +1,31 @@
-import type { Doctor } from "../types";
+import type { Doctor, DoctorContent, TranslationMeta } from "../types";
 
-// PLACEHOLDERS ONLY. No names, credentials or registration numbers are
-// invented. Replace with verified profiles and authorized photographs.
-const placeholderDoctor = (n: number): Doctor => ({
-  slug: `doctor-profile-${n}`,
-  published: true,
-  placeholder: true,
-  sortOrder: n,
-  photo: null,
-  translations: {
-    th: {
-      status: "draft",
-      name: `[ข้อมูลแพทย์ท่านที่ ${n} – รอการยืนยัน]`,
-      role: null,
-      qualifications: null,
-      expertise: null,
-      biography: null,
-    },
-    en: {
-      status: "draft",
-      name: `[Doctor Profile ${n} – Pending Verification]`,
-      role: null,
-      qualifications: null,
-      expertise: null,
-      biography: null,
-    },
-    "zh-CN": {
-      status: "draft",
-      name: `[医生简介 ${n}——待核实]`,
-      role: null,
-      qualifications: null,
-      expertise: null,
-      biography: null,
-    },
-  },
+// Names and licence numbers exactly as supplied by the clinic owner (Thai).
+// They are not transliterated or translated; all other profile fields are
+// pending approved content. No individual portrait is available yet (the
+// supplied photographs show both doctors together).
+const doctorNames = ["รศ.นพ.ชัยณรงค์ โชคสุชาติ ว.23473", "พญ.ธนพร ประทีปชัยกูร ว.51688"] as const;
+
+const content = (name: string): DoctorContent & TranslationMeta => ({
+  status: "draft",
+  name,
+  role: null,
+  qualifications: null,
+  expertise: null,
+  biography: null,
 });
 
-export const doctors: Doctor[] = [1, 2].map(placeholderDoctor);
+export const doctors: Doctor[] = doctorNames.map((name, index) => ({
+  slug: `doctor-profile-${index + 1}`,
+  published: true,
+  placeholder: false,
+  sortOrder: index + 1,
+  photo: null,
+  translations: { th: content(name), en: content(name), "zh-CN": content(name) },
+}));
+
+/** Shared specialty lines supplied by the clinic owner (Thai, exact). */
+export const doctorSpecialties = [
+  "แพทย์เฉพาะทางด้านสูตินรีแพทย์",
+  "ด้านรักษาผู้มีบุตรยากและผ่าตัดผ่านกล้อง",
+] as const;

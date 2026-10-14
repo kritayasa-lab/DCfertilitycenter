@@ -86,11 +86,37 @@ describe("placeholder fixtures", () => {
     }
   });
 
-  it("marks every placeholder record and every translation as draft", () => {
+  it("keeps every translation in draft until reviewed", () => {
     for (const record of [...services, ...doctors, ...packages, ...articles]) {
-      expect(record.placeholder).toBe(true);
       for (const t of Object.values(record.translations)) expect(t!.status).toBe("draft");
     }
+    for (const record of [...packages, ...articles]) expect(record.placeholder).toBe(true);
+  });
+
+  it("lists exactly the six clinic-supplied services in order", () => {
+    expect(services.map((s) => s.translations.th!.title)).toEqual([
+      "ให้คำปรึกษา หาสาเหตุภาวะมีบุตรยาก",
+      "การฉีดน้ำเชื้ออสุจิเข้าสู่โพรงมดลูก (IUI)",
+      "การทำเด็กหลอดแก้ว (IVF)",
+      "การเก็บอสุจิโดยตรงจากอัณฑะ (PESA/TESE)",
+      "การตรวจคัดเลือกพันธุกรรมก่อนการฝังตัว (PGT)",
+      "บริการด้านอื่น ๆ ทางสูติศาสตร์และนรีเวช",
+    ]);
+    // Descriptive copy is pending, never invented.
+    for (const s of services) {
+      for (const t of Object.values(s.translations)) {
+        expect([t!.summary, t!.introduction, t!.suitability, t!.preparation, t!.processSteps]).toEqual([
+          null, null, null, null, null,
+        ]);
+      }
+    }
+  });
+
+  it("uses the doctors' names exactly as supplied, with no invented credentials", () => {
+    expect(doctors.map((d) => d.translations.th!.name)).toEqual([
+      "รศ.นพ.ชัยณรงค์ โชคสุชาติ ว.23473",
+      "พญ.ธนพร ประทีปชัยกูร ว.51688",
+    ]);
   });
 
   it("requires medical review for medical articles and none is marked reviewed", () => {
