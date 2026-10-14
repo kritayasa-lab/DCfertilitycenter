@@ -29,7 +29,7 @@ export function DoctorAvatar({
   return (
     <div
       className={cn(
-        "flex aspect-[4/5] w-full flex-col items-center justify-center gap-3 rounded-md bg-surface-muted text-sand-500",
+        "flex aspect-[4/5] w-full flex-col items-center justify-center gap-3 rounded-md bg-surface-muted text-olive-600",
         className,
       )}
     >
@@ -37,7 +37,7 @@ export function DoctorAvatar({
         <circle cx="24" cy="17" r="8" fill="currentColor" opacity="0.5" />
         <path d="M8 42c2-9 9-14 16-14s14 5 16 14" fill="currentColor" opacity="0.5" />
       </svg>
-      <span className="text-xs text-sand-700">{t("photoPending")}</span>
+      <span className="text-xs text-muted">{t("photoPending")}</span>
     </div>
   );
 }

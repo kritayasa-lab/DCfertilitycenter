@@ -15,6 +15,10 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  images: {
+    // 90 is used for the clinic logo so its flat colours stay crisp.
+    qualities: [75, 90],
+  },
   experimental: {
     globalNotFound: true,
   },

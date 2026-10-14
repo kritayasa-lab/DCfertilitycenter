@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 import { cn } from "@/lib/cn";
 
 const tones = {
-  info: "border-teal-200 bg-primary-soft text-teal-900",
+  info: "border-olive-200 bg-primary-soft text-foreground",
   warning: "border-warning/30 bg-warning-soft text-warning",
   danger: "border-danger/30 bg-danger-soft text-danger",
   success: "border-success/30 bg-success-soft text-success",
