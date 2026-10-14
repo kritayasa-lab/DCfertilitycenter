@@ -3,6 +3,8 @@ import { expect, test, type Page } from "@playwright/test";
 /** Uses the header language switcher (inside the menu on mobile). */
 async function switchLanguage(page: Page, isMobile: boolean, locale: string) {
   const header = page.getByRole("banner");
+  // Client components must be hydrated before interaction.
+  await page.waitForLoadState("networkidle");
   if (isMobile) await header.getByRole("button", { expanded: false }).click();
   await header.getByRole("combobox").first().selectOption(locale);
 }
@@ -12,7 +14,8 @@ const staticPaths = [
   "",
   "/about",
   "/services",
-  "/services/example-service-1",
+  "/services/fertility-consultation",
+  "/success-rates",
   "/doctors",
   "/doctors/doctor-profile-1",
   "/facilities",
@@ -48,10 +51,11 @@ test.describe("header navigation", () => {
     test.skip(isMobile, "desktop navigation");
     await page.goto("/en");
     const nav = page.getByRole("navigation", { name: "Main" });
-    await nav.getByRole("link", { name: "Doctors" }).click();
-    await expect(page).toHaveURL(/\/en\/doctors$/);
-    await expect(nav.getByRole("link", { name: "Doctors" })).toHaveAttribute("aria-current", "page");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Doctors and specialists");
+    await nav.getByRole("link", { name: "FAQ" }).click();
+    await expect(page).toHaveURL(/\/en\/faq$/);
+    await expect(nav.getByRole("link", { name: "FAQ" })).toHaveAttribute("aria-current", "page");
+    await expect(nav.getByRole("link", { name: "Home" })).not.toHaveAttribute("aria-current", "page");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Frequently asked questions");
   });
 
   test("services dropdown opens, is keyboard operable and closes on Escape", async ({ page, isMobile }) => {
@@ -68,8 +72,8 @@ test.describe("header navigation", () => {
     await expect(toggle).toBeFocused();
 
     await toggle.click();
-    await nav.getByRole("link", { name: /Service 2/ }).click();
-    await expect(page).toHaveURL(/\/en\/services\/example-service-2$/);
+    await nav.getByRole("link", { name: "Intrauterine insemination (IUI)" }).click();
+    await expect(page).toHaveURL(/\/en\/services\/iui$/);
   });
 
   test("mobile menu opens, navigates and closes", async ({ page, isMobile }) => {
@@ -95,10 +99,10 @@ test.describe("header navigation", () => {
 
 test.describe("localization", () => {
   test("switching language on a detail page keeps the equivalent page", async ({ page, isMobile }) => {
-    await page.goto("/en/services/example-service-3");
+    await page.goto("/en/services/ivf");
     await switchLanguage(page, isMobile, "th");
-    await expect(page).toHaveURL(/\/th\/services\/example-service-3$/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText("บริการที่ 3");
+    await expect(page).toHaveURL(/\/th\/services\/ivf$/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("การทำเด็กหลอดแก้ว (IVF)");
   });
 
   test("missing translations show an explicit state, not another language", async ({ page }) => {
@@ -123,7 +127,7 @@ test.describe("localization", () => {
 
   test("detail page metadata is localized", async ({ page }) => {
     await page.goto("/th/doctors/doctor-profile-2");
-    await expect(page).toHaveTitle(/ข้อมูลแพทย์ท่านที่ 2/);
+    await expect(page).toHaveTitle("พญ.ธนพร ประทีปชัยกูร ว.51688 | คลินิกหมอชัยณรงค์");
     await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", /\/th\/doctors\/doctor-profile-2$/);
     await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute("content", "th_TH");
   });
@@ -143,9 +147,8 @@ test.describe("content rules", () => {
     await expect(page.getByText(/฿|THB/)).toHaveCount(0);
   });
 
-  test("placeholders are labelled as such", async ({ page }) => {
-    await page.goto("/en/services/example-service-1");
-    await expect(page.getByRole("main").getByText("Placeholder").first()).toBeVisible();
+  test("pending service copy is labelled, never invented", async ({ page }) => {
+    await page.goto("/en/services/fertility-consultation");
     await expect(page.getByText("Approved content pending").first()).toBeVisible();
     await expect(page.getByRole("note").filter({ hasText: "does not replace individual medical advice" })).toBeVisible();
   });
@@ -171,24 +174,16 @@ test.describe("content rules", () => {
   });
 });
 
-test.describe("contact form is not connected", () => {
-  test("form is disabled, clearly labelled and never implies a booking", async ({ page }) => {
+test.describe("contact page", () => {
+  test("shows the supplied contact details and no invented ones", async ({ page }) => {
     await page.goto("/en/contact");
-    await expect(page.getByRole("note").filter({ hasText: "not connected yet" })).toBeVisible();
-    await expect(page.getByText("will not confirm an appointment")).toBeVisible();
-    await expect(page.getByLabel("Full name")).toBeDisabled();
-    await expect(page.getByLabel("Phone number")).toBeDisabled();
-    await expect(page.getByRole("button", { name: "Sending is not available yet" })).toBeDisabled();
-    // No action/endpoint is wired up.
-    await expect(page.locator("main form")).not.toHaveAttribute("action", /.+/);
+    const main = page.getByRole("main");
+    await expect(main.locator('a[href="tel:+66973470648"]')).toHaveText("097-3470648");
+    await expect(main.locator('a[href="tel:+6674225223"]')).toHaveText("074-225-223");
+    await expect(main.getByText("97/12 ถนนราษฎร์ยินดี อำเภอหาดใหญ่ จังหวัดสงขลา 90110")).toBeVisible();
+    await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0);
     // Data minimisation: no medical free-text or file upload fields.
     await expect(page.locator('main form textarea, main form input[type="file"]')).toHaveCount(0);
-  });
-
-  test("contact details are placeholders, not invented values", async ({ page }) => {
-    await page.goto("/en/contact");
-    await expect(page.locator('a[href^="tel:"], a[href^="mailto:"]')).toHaveCount(0);
-    await expect(page.getByRole("main").getByText("Pending verification").first()).toBeVisible();
   });
 });
 
@@ -197,12 +192,13 @@ test.describe("SEO", () => {
     const xml = await (await request.get("/sitemap.xml")).text();
     for (const locale of locales) {
       expect(xml).toContain(`/${locale}/about</loc>`);
-      expect(xml).toContain(`/${locale}/services/example-service-1</loc>`);
+      expect(xml).toContain(`/${locale}/services/fertility-consultation</loc>`);
     }
     expect(xml).not.toContain("expired-example-promotion");
     expect(xml).not.toContain("/zh-CN/articles/example-article-2<");
     expect(xml).not.toContain("styleguide");
     expect(xml).not.toContain("portal");
+    expect(xml).not.toContain("success-rates");
   });
 
   test("each page has exactly one h1 and a localized description", async ({ page }) => {

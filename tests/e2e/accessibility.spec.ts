@@ -7,7 +7,8 @@ const pages = [
   "/zh-CN",
   "/en/about",
   "/th/services",
-  "/en/services/example-service-1",
+  "/en/services/ivf",
+  "/th/success-rates",
   "/zh-CN/doctors",
   "/en/doctors/doctor-profile-1",
   "/en/facilities",
@@ -57,7 +58,7 @@ test("mobile menu open state has no violations", async ({ page, isMobile }) => {
 
 test("no horizontal overflow at mobile width", async ({ page, isMobile }) => {
   test.skip(!isMobile, "mobile layout");
-  for (const path of ["/th", "/zh-CN/contact", "/en/articles", "/th/services/example-service-1"]) {
+  for (const path of ["/th", "/zh-CN/contact", "/en/articles", "/th/services/pesa-tese", "/en", "/zh-CN"]) {
     await page.goto(path);
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
     expect(overflow, path).toBeLessThanOrEqual(0);

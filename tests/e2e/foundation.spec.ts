@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
 
 const locales = [
-  { locale: "th", heading: /เริ่มต้นเส้นทาง/ },
-  { locale: "en", heading: /fertility journey/ },
-  { locale: "zh-CN", heading: /求子之路/ },
+  { locale: "th", heading: /DC Fertility Center/ },
+  { locale: "en", heading: /DC Fertility Center/ },
+  { locale: "zh-CN", heading: /DC Fertility Center/ },
 ] as const;
 
 test("root redirects to the Thai default locale", async ({ page }) => {
@@ -28,10 +28,13 @@ for (const { locale, heading } of locales) {
 
 test("language switcher keeps the visitor on the equivalent page", async ({ page }) => {
   await page.goto("/en/styleguide");
+  // The switcher is a client component: wait for hydration before using it.
+  await page.waitForLoadState("networkidle");
   await page.getByRole("main").getByRole("combobox", { name: "Language" }).selectOption("zh-CN");
   await expect(page).toHaveURL(/\/zh-CN\/styleguide$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
 
+  await page.waitForLoadState("networkidle");
   await page.getByRole("main").getByRole("combobox", { name: "语言" }).selectOption("th");
   await expect(page).toHaveURL(/\/th\/styleguide$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "th");
@@ -39,7 +42,7 @@ test("language switcher keeps the visitor on the equivalent page", async ({ page
 
 test("locale is preserved when following internal links", async ({ page }) => {
   await page.goto("/zh-CN");
-  await page.getByRole("main").getByRole("link", { name: "了解服务项目" }).click();
+  await page.getByRole("main").getByRole("link", { name: "服务项目", exact: true }).first().click();
   await expect(page).toHaveURL(/\/zh-CN\/services$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
 });
@@ -50,10 +53,15 @@ test("unknown paths under a locale show the localized 404", async ({ page }) => 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("Page not found");
 });
 
-test("unverified clinic details are labelled, not presented as fact", async ({ page }) => {
+test("unsupplied clinic details are labelled, not presented as fact", async ({ page }) => {
   await page.goto("/en");
-  await expect(page.getByRole("banner").getByText("Provisional working name")).toBeVisible();
-  await expect(page.getByRole("note")).toContainText("has not been verified");
+  await expect(page.getByRole("note").first()).toContainText("has not been verified");
+  const footer = page.getByRole("contentinfo");
+  for (const network of ["Instagram", "TikTok", "Facebook"]) {
+    await expect(footer.getByText(network)).toBeVisible();
+    await expect(footer.getByRole("link", { name: network })).toHaveCount(0);
+  }
+  await expect(footer.getByText("official link pending").first()).toBeVisible();
 });
 
 test("skip link is the first focusable element and targets main", async ({ page, isMobile }) => {
